@@ -1,4 +1,4 @@
-# 𝙎𝙔𝙉𝘿𝙄𝘾𝘼𝙏𝙀 𝕏 | Link Studio
+# Shimul King | Link Studio
 
 A high-performance, zero-middleman Google Share Link Converter, 50+ Worldwide ccTLD Domain Multiplier, and Query Salting Anti-Spam Suite with 6-Hour Auto-Rotating Live Wallpapers.
 
