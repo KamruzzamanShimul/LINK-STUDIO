@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="𝙎𝙔𝙉𝘿𝙄𝘾𝘼𝙏𝙀 𝕏 Link Studio | 100% Trust Next-Gen Google Share Token Converter & Multi-Link Expander Suite" />
+  <title>𝙎𝙔𝙉𝘿𝙄𝘾𝘼𝙏𝙀 𝕏 | Link Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* Evolute Dark Obsidian & Ash Palette */
+      --bg-void: #060709;
+      --bg-sidebar: rgba(8, 10, 13, 0.9);
+      --bg-card: rgba(13, 15, 20, 0.74);
+      --bg-card-hover: rgba(18, 20, 27, 0.88);
+      --bg-input: rgba(10, 11, 15, 0.92);
+      
+      /* Glassmorphism & Cyber Accents */
+      --glass-border: rgba(255, 255, 255, 0.065);
+      --glass-border-hover: rgba(255, 255, 255, 0.13);
+      --glass-border-focus: rgba(124, 58, 237, 0.65);
+      --glass-blur: blur(28px);
+      --glass-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+
+      /* Typography */
+      --text-pure: #ffffff;
+      --text-main: #e2e4e9;
+      --text-muted: #8b92a0;
+      --text-dim: #4b5262;
+
+      /* Violet Monolithic Button Palette (Uniform solid gradient across whole button) */
+      --gradient-btn: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      --gradient-glow: rgba(99, 102, 241, 0.35);
+      --btn-bg: #6366f1;
+      --btn-bg-hover: #4f46e5;
+      --btn-glow: rgba(99, 102, 241, 0.3);
+
+      /* Amber/Gold Cyber Accent (from Evolute theme) */
+      --cyber-amber: #f59e0b;
+      --cyber-amber-glow: rgba(245, 158, 11, 0.28);
+      --success-green: #10b981;
+
+      /* Zero Border Radius Across Overall Studio */
+      --radius-sm: 0px;
+      --radius-md: 0px;
+      --radius-lg: 0px;
+      --radius-full: 0px;
+      --transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important;
+    }
+
+    body {
+      font-family: 'Didact Gothic', sans-serif;
+      background-color: var(--bg-void);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========================================== */
+    /* LIVE WALLPAPER LAYERS                      */
+    /* ========================================== */
+    .wallpaper-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    #bgVideoPlayer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      opacity: 1;
+      transition: opacity 0.8s ease-in-out;
+      filter: none;
+    }
+
+    .wallpaper-overlay {
+      display: none;
+    }
+
+
+
+    /* Full-Screen Dashboard Layout */
+    .dashboard-layout {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Main Content Container centered on screen */
+    .main-content-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      width: calc(100% - 320px);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Centered Dashboard Content Area */
+    .main-content {
+      width: 100%;
+      max-width: 960px;
+      padding: 40px 32px 80px 32px;
+      box-sizing: border-box;
+      margin: 0 auto;
+    }
+
+    /* Hero Homepage Wrapper (Zero Box / Seamless) */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
+    .hero-container.tab-hidden {
+      display: none !important;
+    }
+
+    /* Editorial Cyber Title Typography like Screenshot 3 */
+    .hero-back-title {
+      font-size: clamp(3.2rem, 7vw, 6.4rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.92);
+      margin: 0;
+      position: relative;
+      z-index: 2;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .hero-sub-title {
+      font-size: clamp(1.4rem, 3.2vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin: 8px 0 28px 0;
+      position: relative;
+      z-index: 2;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .hero-tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 10px 28px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.12);
+      transition: var(--transition);
+      margin-bottom: 48px;
+    }
+
+    .hero-tag-pill:hover {
+      border-color: rgba(16, 185, 129, 0.6);
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.25);
+    }
+
+    /* Hero Feature Display Badges (Non-clickable Showcase Pills) */
+    .hero-features-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+      z-index: 2;
+    }
+
+    .hero-feature-badge {
+      padding: 9px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.035);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: default;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .hero-feature-badge.primary {
+      background: rgba(255, 255, 255, 0.035);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      box-shadow: none;
+    }
+
+    /* Editorial Cyber Metric Cards (Bottom right/left like Screenshot 3) */
+    .hero-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 460px;
+      width: 100%;
+      z-index: 2;
+    }
+
+    .hero-metric-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      text-align: left;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: var(--transition);
+    }
+
+    .hero-metric-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-2px);
+    }
+
+    .hero-metric-val {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+      margin-bottom: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .hero-metric-label {
+      font-size: 0.72rem;
+      color: #64748b;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+    }
+
+    /* ========================================== */
+    /* LEFT SIDEBAR STYLES                        */
+    /* ========================================== */
+    .sidebar {
+      width: 320px;
+      min-width: 320px;
+      background: var(--bg-sidebar);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-right: 1px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 100;
+      padding: 26px 18px;
+    }
+
+    /* Brand Header */
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 4px 8px 22px 8px;
+      border-bottom: 1px solid var(--glass-border);
+      margin-bottom: 22px;
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--gradient-btn);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      box-shadow: 0 4px 18px var(--gradient-glow);
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+    }
+
+    .brand-icon::after {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cyber-amber);
+      top: 4px;
+      right: 4px;
+      box-shadow: 0 0 6px var(--cyber-amber);
+    }
+
+    .brand-info h2 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-pure);
+      line-height: 1.15;
+    }
+
+    .brand-info span {
+      font-size: 0.74rem;
+      color: #c084fc;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .brand-info .brand-dev {
+      font-size: 0.65rem;
+      color: #94a3b8;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Navigation Menu */
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .nav-heading {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      padding: 8px 12px 4px 12px;
+      margin-top: 6px;
+    }
+
+    .sidebar-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 11px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+      white-space: nowrap;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .sidebar-btn:hover {
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--text-pure);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .sidebar-btn.active {
+      background: var(--btn-bg) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 16px var(--btn-glow);
+      border-color: transparent !important;
+    }
+
+    .sidebar-btn-icon {
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+    }
+
+    .sidebar-btn-badge {
+      margin-left: auto;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .sidebar-btn.active .sidebar-btn-badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    /* Live Wallpaper Controls Widget in Sidebar */
+    .wallpaper-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+
+    .wallpaper-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .wp-title-text {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-pure);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wp-current-name {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #c084fc;
+      margin-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .wp-btn-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-wp-cycle {
+      flex: 1;
+      background: var(--btn-bg);
+      border: none;
+      color: #ffffff;
+      padding: 8px 12px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: var(--transition);
+      box-shadow: 0 2px 10px var(--btn-glow);
+    }
+
+    .btn-wp-cycle:hover {
+      background: var(--btn-bg-hover);
+      transform: translateY(-1px);
+    }
+
+    .wp-meta-cycle {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Sidebar Footer Status Widget */
+    .sidebar-footer {
+      padding-top: 14px;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .status-widget {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+    }
+
+    .status-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyber-amber);
+      box-shadow: 0 0 8px var(--cyber-amber);
+    }
+
+    .status-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-pure);
+      letter-spacing: 0.02em;
+    }
+
+    .status-desc {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      line-height: 1.35;
+    }
+
+    /* ========================================== */
+    /* MAIN CONTENT AREA                          */
+    /* ========================================== */
+    .main-content {
+      width: 100%;
+      max-width: 780px;
+      padding: 30px 24px 70px 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Top Breadcrumb & Cyber Badge */
+    .top-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .page-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.22);
+      color: #fbbf24;
+      padding: 5px 14px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .page-tag span.amber-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cyber-amber);
+      box-shadow: 0 0 6px var(--cyber-amber);
+    }
+
+    .main-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 40%, #9ca3af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Stats Quick Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      padding: 18px 20px;
+      backdrop-filter: var(--glass-blur);
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      border-color: var(--glass-border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .stat-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-pure);
+      line-height: 1.1;
+      margin-bottom: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat-label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Streamlined Minimalist Section Card */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      padding: 24px 26px;
+      margin-bottom: 22px;
+      box-shadow: var(--glass-shadow);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .glass-card.tab-hidden {
+      display: none !important;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-num {
+      width: 32px;
+      height: 32px;
+      background: var(--btn-bg);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px var(--btn-glow);
+      border: none;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-pure);
+      letter-spacing: -0.015em;
+    }
+
+    /* Form Fields */
+    .field-group {
+      margin-bottom: 22px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .input-box {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--glass-border);
+      padding: 10px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: var(--text-pure);
+      outline: none;
+      transition: var(--transition);
+      backdrop-filter: blur(12px);
+    }
+
+    .input-box:focus {
+      border-color: rgba(99, 102, 241, 0.6);
+      background: #141720;
+    }
+
+    .input-box::placeholder {
+      color: var(--text-dim);
+      font-family: 'Didact Gothic', sans-serif;
+    }
+
+    /* Quantity & Controls Row (Generate on Left, Values on Right - No Outer Box) */
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 14px;
+      margin-bottom: 0px;
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+
+    .qty-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-left: auto;
+    }
+
+    .qty-label {
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    
+    .pill-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .pill-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .pill-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .pill-btn.active {
+      background: var(--btn-bg);
+      border-color: var(--btn-bg);
+      color: #ffffff;
+      box-shadow: 0 2px 10px var(--btn-glow);
+    }
+
+    .custom-qty-box {
+      width: 64px;
+      background: rgba(14, 16, 22, 0.95);
+      border: 1px solid var(--glass-border);
+      padding: 8px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: var(--text-pure);
+      text-align: center;
+      outline: none;
+    }
+    .custom-qty-box:focus {
+      border-color: rgba(99, 102, 241, 0.6);
+    }
+
+    /* Solid Unified Action Buttons (No blue edge, uniform styling) */
+    .btn-gradient {
+      background: var(--btn-bg);
+      border: none;
+      color: #ffffff;
+      padding: 9px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 2px 12px var(--btn-glow);
+    }
+
+    .btn-gradient:hover {
+      background: var(--btn-bg-hover);
+      box-shadow: 0 4px 18px rgba(99, 102, 241, 0.45);
+    }
+
+    .btn-gradient:active {
+      transform: translateY(0);
+    }
+
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border);
+      color: var(--text-pure);
+      padding: 11px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: var(--transition);
+    }
+
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-glass.copied {
+      background: var(--success-green) !important;
+      border-color: var(--success-green) !important;
+      color: #ffffff !important;
+    }
+
+    /* Output Results Area */
+    .results-area {
+      display: none;
+      margin-top: 24px;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .results-area.visible {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .results-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      border-bottom: none;
+    }
+
+    .results-count {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #c084fc;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .results-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Scrollable Links Table */
+    .links-table {
+      background: rgba(10, 11, 14, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+      max-height: 450px;
+      overflow-y: auto;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.86rem;
+      transition: var(--transition);
+    }
+
+    .link-item:last-child {
+      border-bottom: none;
+    }
+
+    .link-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .link-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .link-num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      min-width: 28px;
+    }
+
+    .link-badge {
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(124, 58, 237, 0.28);
+      color: #c084fc;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+
+    .link-url-text {
+      font-family: 'JetBrains Mono', monospace;
+      color: #e2e4e9;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .link-url-text:hover {
+      color: #93c5fa;
+      text-decoration: underline;
+    }
+
+    .link-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-item {
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn-item:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-item.copied {
+      background: var(--success-green) !important;
+      border-color: var(--success-green) !important;
+      color: #ffffff !important;
+    }
+
+    /* Section 1 Specific Card */
+    .single-result-box {
+      background: rgba(14, 16, 21, 0.8);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .single-result-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .single-result-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .single-result-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.96rem;
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+
+    .send-down-btn {
+      background: transparent;
+      border: 1px dashed rgba(124, 58, 237, 0.45);
+      color: #c084fc;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .send-down-btn:hover {
+      background: rgba(124, 58, 237, 0.14);
+      border-style: solid;
+      color: #e9d5ff;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #181a22;
+      border: 1px solid #7c3aed;
+      color: #ffffff;
+      padding: 12px 26px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.7);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .dashboard-layout {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+      }
+      .main-content {
+        padding: 24px 18px;
+      }
+      .stats-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================== -->
+  <!-- LIVE WALLPAPER CONTAINER (VIDEO ONLY)       -->
+  <!-- ========================================== -->
+  <div class="wallpaper-container">
+    <video id="bgVideoPlayer" autoplay loop muted playsinline></video>
+    <div class="wallpaper-overlay"></div>
+  </div>
+
+  <div class="dashboard-layout">
+    <!-- ========================================== -->
+    <!-- LEFT SIDEBAR                               -->
+    <!-- ========================================== -->
+    <aside class="sidebar">
+      <!-- Brand Header (Clickable to return Home) -->
+      <div class="brand-wrap" onclick="switchSection('home')" title="Go to Home">
+        <div class="brand-icon">𝕏</div>
+        <div class="brand-info">
+          <h2>𝙎𝙔𝙉𝘿𝙄𝘾𝘼𝙏𝙀 𝕏</h2>
+          <span>Link Studio</span>
+          <div class="brand-dev">DEV SAGE</div>
+        </div>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="nav-menu">
+        <button class="sidebar-btn active" id="btnNavHome" onclick="switchSection('home')">
+          <span class="sidebar-btn-icon">⚡</span>
+          <span>Home</span>
+        </button>
+
+        <div class="nav-heading">Engines &amp; Modules</div>
+
+        <button class="sidebar-btn" id="btnNav1" onclick="switchSection(1)">
+          <span class="sidebar-btn-icon">🔗</span>
+          <span>Link Converter</span>
+        </button>
+
+        <button class="sidebar-btn" id="btnNav2" onclick="switchSection(2)">
+          <span class="sidebar-btn-icon">🌐</span>
+          <span>Domain Multiplier</span>
+          <span class="sidebar-btn-badge">ccTLD</span>
+        </button>
+
+        <button class="sidebar-btn" id="btnNav3" onclick="switchSection(3)">
+          <span class="sidebar-btn-icon">🛡️</span>
+          <span>Salt Multiplier</span>
+          <span class="sidebar-btn-badge">Entropy</span>
+        </button>
+      </nav>
+
+      <!-- Live Wallpaper Controller Widget -->
+      <div class="wallpaper-card">
+        <div class="wallpaper-card-header">
+          <span class="wp-title-text">🎬 Live Wallpaper</span>
+          <span style="font-size:0.68rem; color:var(--text-dim);" id="wpCycleBadge">6h Auto</span>
+        </div>
+        <div class="wp-current-name" id="wpCurrentName">Loading wallpaper...</div>
+        <div class="wp-btn-row">
+          <button class="btn-wp-cycle" id="btnRefreshWallpaper">
+            <span>🔄 Refresh</span>
+          </button>
+        </div>
+        <div class="wp-meta-cycle">
+          <span>Source: wallpapers.json</span>
+          <span id="wpIndexDisplay">1/4</span>
+        </div>
+      </div>
+
+      <!-- Sidebar Footer Status Widget -->
+      <div class="sidebar-footer">
+        <div class="status-widget">
+          <div class="status-top">
+            <span class="status-dot"></span>
+            <span class="status-title">𝙎𝙔𝙉𝘿𝙄𝘾𝘼𝙏𝙀 Core Active</span>
+          </div>
+          <div class="status-desc">Zero-middleman direct routing engine with client-side isolation.</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ========================================== -->
+    <!-- MAIN CONTENT AREA (CENTERED DASHBOARD)     -->
+    <!-- ========================================== -->
+    <div class="main-content-wrapper">
+
+      <!-- ========================================== -->
+      <!-- HOME PAGE (FULL-SCREEN EDITORIAL CYBER VIEW) -->
+      <!-- ========================================== -->
+      <section class="hero-container" id="sectionHome">
+        
+        <!-- Large Editorial Headings Inspired by Screenshot 3 -->
+        <h1 class="hero-back-title">
+          - 𝙎𝙔𝙉𝘿𝙄𝘾𝘼𝙏𝙀 𝕏 -
+        </h1>
+        <div class="hero-sub-title">
+          LINK STUDIO ARCHITECTURE
+        </div>
+
+        <!-- 100% Trust High-Contrast Neon Glass Pill -->
+        <div class="hero-tag-pill">
+          <span style="color:#10b981; font-size:1.15rem; font-weight:800;">✓</span>
+          <span style="font-family:'JetBrains Mono', monospace; font-size:0.96rem; font-weight:800; color:#ffffff; letter-spacing:0.08em;">100% TRUST</span>
+        </div>
+
+        <!-- Cyber Feature Badges (Non-Clickable Feature Showcase) -->
+        <div class="hero-features-row">
+          <div class="hero-feature-badge primary">
+            <span>⚡ Convert Link</span>
+          </div>
+          <div class="hero-feature-badge">
+            <span>🌐 50+ Google Domains</span>
+          </div>
+          <div class="hero-feature-badge">
+            <span>🛡️ Query Salt Multiplier</span>
+          </div>
+        </div>
+
+        <!-- Cyber Metric Stats Cards (like Screenshot 3 bottom stats) -->
+        <div class="hero-metrics-grid">
+          <div class="hero-metric-card">
+            <div class="hero-metric-val">300+</div>
+            <div class="hero-metric-label">Processed Campaigns & High CPM Routing</div>
+          </div>
+          <div class="hero-metric-card">
+            <div class="hero-metric-val" style="color:#10b981;">100%</div>
+            <div class="hero-metric-label">Zero-Middleman Direct Google Traffic Trust</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Centered Container for Functional Modules -->
+      <main class="main-content">
+
+      <!-- ========================================== -->
+      <!-- SECTION 1: NORMAL TOKEN CONVERTER          -->
+      <!-- ========================================== -->
+      <div class="glass-card tab-hidden" id="section1">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title">Link Converter</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="s1Input">Input Token or Google Share Link</label>
+          <input 
+            type="text" 
+            id="s1Input" 
+            class="input-box" 
+            placeholder="Paste raw token (e.g. IR5RD7flxppZKP3h2) or link..." 
+            autocomplete="off"
+          />
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button id="s1BtnConvert" class="btn-gradient">
+            ⚡ Convert Link
+          </button>
+        </div>
+
+        <!-- Section 1 Results -->
+        <div id="s1Results" class="results-area">
+          <div style="margin-top: 18px;">
+            <div class="single-result-box">
+              <div class="single-result-top">
+                <span class="single-result-label">Official Google Search Domain Format</span>
+                <span style="font-size:0.75rem; color:#10b981; font-weight:700;">★ 100% MAXIMUM TRUST</span>
+              </div>
+              <div class="single-result-url" id="s1GoogleUrl">-</div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                <button class="btn-glass" id="s1CopyGoogle">📋 Copy Google URL</button>
+                <a href="#" target="_blank" class="btn-glass" id="s1TestGoogle">↗ Test Link</a>
+                <button class="send-down-btn" id="s1SendToDomains">↳ Send to Section 2 (Domains)</button>
+                <button class="send-down-btn" id="s1SendToSalt">↳ Send to Section 3 (Salt)</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- SECTION 2: GOOGLE DOMAIN MULTIPLIER        -->
+      <!-- ========================================== -->
+      <div class="glass-card tab-hidden" id="section2">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title">Google Worldwide Domain Multiplier</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="s2Input">Input Link or Token for Domain Multiplier</label>
+          <input 
+            type="text" 
+            id="s2Input" 
+            class="input-box" 
+            placeholder="Enter converted link or token (e.g. IR5RD7flxppZKP3h2)..." 
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="controls-row">
+          <button id="s2BtnGenerate" class="btn-gradient">
+            🌐 Generate Domain Links
+          </button>
+
+          <div class="qty-selector">
+            <span class="qty-label">Quantity:</span>
+            <div class="pill-group" id="s2Pills">
+              <button type="button" class="pill-btn active" data-qty="5">5</button>
+              <button type="button" class="pill-btn" data-qty="10">10</button>
+              <button type="button" class="pill-btn" data-qty="25">25</button>
+              <button type="button" class="pill-btn" data-qty="50">50</button>
+            </div>
+            <input type="number" id="s2CustomQty" class="custom-qty-box" value="5" min="1" max="300" />
+          </div>
+        </div>
+
+        <!-- Section 2 Results -->
+        <div id="s2Results" class="results-area">
+          <div class="results-header-bar">
+            <span class="results-count" id="s2ResultsCount">0 Links Generated</span>
+            <div class="results-actions">
+              <button class="btn-glass" id="s2CopyAll">📋 Copy All</button>
+              <button class="btn-glass" id="s2Download">💾 .TXT</button>
+            </div>
+          </div>
+          <div class="links-table" id="s2LinksList"></div>
+        </div>
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- SECTION 3: QUERY PARAMETER SALT MULTIPLIER -->
+      <!-- ========================================== -->
+      <div class="glass-card tab-hidden" id="section3">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title">Query Parameter Salt Multiplier</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="s3Input">Input Link or Token for Query Salting</label>
+          <input 
+            type="text" 
+            id="s3Input" 
+            class="input-box" 
+            placeholder="Enter link or token to salt..." 
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="controls-row">
+          <button id="s3BtnGenerate" class="btn-gradient">
+            ⚡ Generate Salted Links
+          </button>
+
+          <div class="qty-selector">
+            <span class="qty-label">Quantity:</span>
+            <div class="pill-group" id="s3Pills">
+              <button type="button" class="pill-btn active" data-qty="5">5</button>
+              <button type="button" class="pill-btn" data-qty="10">10</button>
+              <button type="button" class="pill-btn" data-qty="25">25</button>
+              <button type="button" class="pill-btn" data-qty="50">50</button>
+            </div>
+            <input type="number" id="s3CustomQty" class="custom-qty-box" value="5" min="1" max="500" />
+          </div>
+        </div>
+
+        <!-- Section 3 Results -->
+        <div id="s3Results" class="results-area">
+          <div class="results-header-bar">
+            <span class="results-count" id="s3ResultsCount">0 Links Generated</span>
+            <div class="results-actions">
+              <button class="btn-glass" id="s3CopyAll">📋 Copy All</button>
+              <button class="btn-glass" id="s3Download">💾 .TXT</button>
+            </div>
+          </div>
+          <div class="links-table" id="s3LinksList"></div>
+        </div>
+      </div>
+    </main>
+    </div> <!-- end .main-content-wrapper -->
+  </div> <!-- end .dashboard-layout -->
+
+  <div id="toast" class="toast">Action completed!</div>
+
+  <script>
+    // ==========================================
+    // 6-HOUR AUTO-ROTATING WALLPAPER ENGINE
+    // ==========================================
+    const DEFAULT_WALLPAPERS = [
+      {
+        id: "sung-jin-woo",
+        title: "Sung Jin Woo Purple Aura",
+        type: "video",
+        url: "https://mylivewallpapers.com/wp-content/uploads/Anime/PREVIEW-Sung-Jin-Woo-Purple-Aura-1.mp4"
+      },
+      {
+        id: "glowing-blue-samurai",
+        title: "Glowing Blue Samurai",
+        type: "video",
+        url: "https://mylivewallpapers.com/wp-content/uploads/Fantasy/PREVIEW-Glowing-Blue-Samurai.mp4"
+      },
+      {
+        id: "dark-uchiha-naruto",
+        title: "Dark Uchiha Naruto",
+        type: "video",
+        url: "https://mylivewallpapers.com/wp-content/uploads/Anime/PREVIEW-Dark-Uchiha-Naruto.mp4"
+      },
+      {
+        id: "dark-fantasy-wraith-king",
+        title: "Dark Fantasy Wraith King",
+        type: "video",
+        url: "https://mylivewallpapers.com/wp-content/uploads/Fantasy/PREVIEW-Dark-Fantasy-Wraith-King.mp4"
+      }
+    ];
+
+    let activeWallpapers = [...DEFAULT_WALLPAPERS];
+    let currentWallpaperIndex = 0;
+    const bgVideo = document.getElementById('bgVideoPlayer');
+    const wpCurrentName = document.getElementById('wpCurrentName');
+    const wpIndexDisplay = document.getElementById('wpIndexDisplay');
+    const btnRefreshWallpaper = document.getElementById('btnRefreshWallpaper');
+
+    async function loadWallpapersFromGitHub() {
+      try {
+        const res = await fetch('./wallpapers.json', { cache: 'no-cache' });
+        if (res.ok) {
+          const rawText = await res.text();
+          let parsed = [];
+          try {
+            parsed = JSON.parse(rawText);
+          } catch(e) {
+            // Flexible parser: If user pasted raw URLs line-by-line instead of JSON
+            const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(l => l.startsWith('http'));
+            parsed = lines.map((url, i) => {
+              const filename = url.split('/').filter(Boolean).pop().split('?')[0].replace(/[-_]/g, ' ');
+              return {
+                id: `wp-${i+1}`,
+                title: filename || `Wallpaper ${i+1}`,
+                type: 'video',
+                url: url
+              };
+            });
+          }
+
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            activeWallpapers = parsed.map((item, i) => {
+              if (typeof item === 'string') {
+                return { id: `wp-${i+1}`, title: `Wallpaper ${i+1}`, type: 'video', url: item };
+              }
+              return item;
+            });
+          }
+        }
+      } catch (err) {
+        // Fallback
+      }
+      applyWallpaperBySchedule();
+    }
+
+    function applyWallpaperBySchedule() {
+      const SIX_HOURS_MS = 6 * 60 * 60 * 1000;
+      const slot = Math.floor(Date.now() / SIX_HOURS_MS);
+      const scheduledIdx = slot % activeWallpapers.length;
+
+      const manualIdx = sessionStorage.getItem('syndicate_wp_idx');
+      if (manualIdx !== null) {
+        currentWallpaperIndex = parseInt(manualIdx, 10) % activeWallpapers.length;
+      } else {
+        currentWallpaperIndex = scheduledIdx;
+      }
+
+      displayWallpaper(currentWallpaperIndex);
+    }
+
+    function displayWallpaper(idx) {
+      if (!activeWallpapers || activeWallpapers.length === 0) return;
+      const wp = activeWallpapers[idx];
+
+      bgVideo.style.opacity = '0';
+      setTimeout(() => {
+        bgVideo.src = wp.url;
+        bgVideo.load();
+        bgVideo.play().then(() => {
+          bgVideo.style.opacity = '1';
+        }).catch(() => {
+          bgVideo.style.opacity = '0';
+        });
+      }, 350);
+
+      wpCurrentName.textContent = wp.title;
+      wpIndexDisplay.textContent = `${idx + 1}/${activeWallpapers.length}`;
+    }
+
+    btnRefreshWallpaper.addEventListener('click', () => {
+      currentWallpaperIndex = (currentWallpaperIndex + 1) % activeWallpapers.length;
+      sessionStorage.setItem('syndicate_wp_idx', currentWallpaperIndex);
+      displayWallpaper(currentWallpaperIndex);
+      showToast(`Refreshed wallpaper: ${activeWallpapers[currentWallpaperIndex].title}`);
+    });
+
+    loadWallpapersFromGitHub();
+
+    // ==========================================
+    // GOOGLE DOMAINS & CRYPTO SALTING ARRAYS
+    // ==========================================
+    const GOOGLE_DOMAINS = [
+      { domain: 'www.google.com', country: 'Global (USA)', flag: '🌐' },
+      { domain: 'www.google.co.uk', country: 'United Kingdom', flag: '🇬🇧' },
+      { domain: 'www.google.ca', country: 'Canada', flag: '🇨🇦' },
+      { domain: 'www.google.de', country: 'Germany', flag: '🇩🇪' },
+      { domain: 'www.google.fr', country: 'France', flag: '🇫🇷' },
+      { domain: 'www.google.com.au', country: 'Australia', flag: '🇦🇺' },
+      { domain: 'www.google.co.jp', country: 'Japan', flag: '🇯🇵' },
+      { domain: 'www.google.it', country: 'Italy', flag: '🇮🇹' },
+      { domain: 'www.google.es', country: 'Spain', flag: '🇪🇸' },
+      { domain: 'www.google.com.br', country: 'Brazil', flag: '🇧🇷' },
+      { domain: 'www.google.co.in', country: 'India', flag: '🇮🇳' },
+      { domain: 'www.google.nl', country: 'Netherlands', flag: '🇳🇱' },
+      { domain: 'www.google.pl', country: 'Poland', flag: '🇵🇱' },
+      { domain: 'www.google.se', country: 'Sweden', flag: '🇸🇪' },
+      { domain: 'www.google.ch', country: 'Switzerland', flag: '🇨🇭' },
+      { domain: 'www.google.at', country: 'Austria', flag: '🇦🇹' },
+      { domain: 'www.google.be', country: 'Belgium', flag: '🇧🇪' },
+      { domain: 'www.google.com.mx', country: 'Mexico', flag: '🇲🇽' },
+      { domain: 'www.google.com.ar', country: 'Argentina', flag: '🇦🇷' },
+      { domain: 'www.google.co.nz', country: 'New Zealand', flag: '🇳🇿' },
+      { domain: 'www.google.ie', country: 'Ireland', flag: '🇮🇪' },
+      { domain: 'www.google.dk', country: 'Denmark', flag: '🇩🇰' },
+      { domain: 'www.google.no', country: 'Norway', flag: '🇳🇴' },
+      { domain: 'www.google.fi', country: 'Finland', flag: '🇫🇮' },
+      { domain: 'www.google.pt', country: 'Portugal', flag: '🇵🇹' },
+      { domain: 'www.google.com.sg', country: 'Singapore', flag: '🇸🇬' },
+      { domain: 'www.google.com.tr', country: 'Turkey', flag: '🇹🇷' },
+      { domain: 'www.google.co.za', country: 'South Africa', flag: '🇿🇦' },
+      { domain: 'www.google.com.co', country: 'Colombia', flag: '🇨🇴' },
+      { domain: 'www.google.cl', country: 'Chile', flag: '🇨🇱' },
+      { domain: 'www.google.com.eg', country: 'Egypt', flag: '🇪🇬' },
+      { domain: 'www.google.ae', country: 'United Arab Emirates', flag: '🇦🇪' },
+      { domain: 'www.google.com.sa', country: 'Saudi Arabia', flag: '🇸🇦' },
+      { domain: 'www.google.com.my', country: 'Malaysia', flag: '🇲🇾' },
+      { domain: 'www.google.com.ph', country: 'Philippines', flag: '🇵🇭' },
+      { domain: 'www.google.co.th', country: 'Thailand', flag: '🇹🇭' },
+      { domain: 'www.google.com.vn', country: 'Vietnam', flag: '🇻🇳' },
+      { domain: 'www.google.co.id', country: 'Indonesia', flag: '🇮🇩' },
+      { domain: 'www.google.com.tw', country: 'Taiwan', flag: '🇹🇼' },
+      { domain: 'www.google.co.kr', country: 'South Korea', flag: '🇰🇷' },
+      { domain: 'www.google.gr', country: 'Greece', flag: '🇬🇷' },
+      { domain: 'www.google.cz', country: 'Czech Republic', flag: '🇨🇿' },
+      { domain: 'www.google.ro', country: 'Romania', flag: '🇷🇴' },
+      { domain: 'www.google.hu', country: 'Hungary', flag: '🇭🇺' },
+      { domain: 'www.google.com.ua', country: 'Ukraine', flag: '🇺🇦' },
+      { domain: 'www.google.com.pk', country: 'Pakistan', flag: '🇵🇰' },
+      { domain: 'www.google.com.bd', country: 'Bangladesh', flag: '🇧🇩' },
+      { domain: 'www.google.com.ng', country: 'Nigeria', flag: '🇳🇬' },
+      { domain: 'www.google.com.pe', country: 'Peru', flag: '🇵🇪' },
+      { domain: 'www.google.co.il', country: 'Israel', flag: '🇮🇱' }
+    ];
+
+    const SALT_KEYS = ['v', 's', 'sub', 'trk', 'm', 'tag', 'ref', 'uid', 'c', 'rnd'];
+
+    function extractToken(raw) {
+      if (!raw) return '';
+      let text = raw.trim();
+
+      const queryMatch = text.match(/[?&]q=([a-zA-Z0-9_\-]+)/);
+      if (queryMatch) return queryMatch[1];
+
+      if (text.includes('share.google/')) {
+        const after = text.split('share.google/')[1];
+        return after.split(/[?#&/]/)[0].replace(/[^a-zA-Z0-9_\-]/g, '');
+      }
+
+      if (text.includes('/')) {
+        const parts = text.split(/[?#]/)[0].split('/');
+        text = parts[parts.length - 1];
+      }
+
+      return text.replace(/[^a-zA-Z0-9_\-]/g, '');
+    }
+
+    function generateEntropySalt(len = 10) {
+      const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      let out = '';
+      for (let i = 0; i < len; i++) {
+        out += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return out;
+    }
+
+    // ==========================================
+    // SIDEBAR TAB SWITCHER LOGIC (HOME DEFAULT)
+    // ==========================================
+    function switchSection(target) {
+      const btnHome = document.getElementById('btnNavHome');
+      const btn1 = document.getElementById('btnNav1');
+      const btn2 = document.getElementById('btnNav2');
+      const btn3 = document.getElementById('btnNav3');
+
+      const secHome = document.getElementById('sectionHome');
+      const sec1 = document.getElementById('section1');
+      const sec2 = document.getElementById('section2');
+      const sec3 = document.getElementById('section3');
+
+      [btnHome, btn1, btn2, btn3].forEach(b => { if (b) b.classList.remove('active'); });
+
+      if (target === 'home') {
+        btnHome.classList.add('active');
+        secHome.classList.remove('tab-hidden');
+        sec1.classList.add('tab-hidden');
+        sec2.classList.add('tab-hidden');
+        sec3.classList.add('tab-hidden');
+      } else if (target === 1) {
+        btn1.classList.add('active');
+        secHome.classList.add('tab-hidden');
+        sec1.classList.remove('tab-hidden');
+        sec2.classList.add('tab-hidden');
+        sec3.classList.add('tab-hidden');
+      } else if (target === 2) {
+        btn2.classList.add('active');
+        secHome.classList.add('tab-hidden');
+        sec1.classList.add('tab-hidden');
+        sec2.classList.remove('tab-hidden');
+        sec3.classList.add('tab-hidden');
+      } else if (target === 3) {
+        btn3.classList.add('active');
+        secHome.classList.add('tab-hidden');
+        sec1.classList.add('tab-hidden');
+        sec2.classList.add('tab-hidden');
+        sec3.classList.remove('tab-hidden');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    async function copyText(text, btnElement) {
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+
+      if (btnElement) {
+        const orig = btnElement.innerHTML;
+        btnElement.classList.add('copied');
+        btnElement.innerHTML = `✓ Copied!`;
+        showToast('Copied to clipboard!');
+        setTimeout(() => {
+          btnElement.classList.remove('copied');
+          btnElement.innerHTML = orig;
+        }, 1500);
+      } else {
+        showToast('Copied to clipboard!');
+      }
+    }
+
+    function downloadTxt(filename, content) {
+      if (!content) return;
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast(`Downloaded ${filename}!`);
+    }
+
+    // ==========================================
+    // SECTION 1 LOGIC
+    // ==========================================
+    let s1CurrentToken = '';
+    const s1Input = document.getElementById('s1Input');
+    const s1BtnConvert = document.getElementById('s1BtnConvert');
+    const s1Results = document.getElementById('s1Results');
+    const s1GoogleUrl = document.getElementById('s1GoogleUrl');
+    const s1TestGoogle = document.getElementById('s1TestGoogle');
+
+    s1BtnConvert.addEventListener('click', () => {
+      const token = extractToken(s1Input.value);
+      if (!token) {
+        alert('Please enter a valid Google Share token or URL in Section 1.');
+        return;
+      }
+      s1CurrentToken = token;
+      const gUrl = `https://www.google.com/share.google?q=${token}`;
+
+      s1GoogleUrl.textContent = gUrl;
+      s1TestGoogle.href = gUrl;
+      s1Results.classList.add('visible');
+      showToast('Link converted successfully!');
+    });
+
+    document.getElementById('s1CopyGoogle').addEventListener('click', (e) => {
+      copyText(s1GoogleUrl.textContent, e.currentTarget);
+    });
+
+    document.getElementById('s1SendToDomains').addEventListener('click', () => {
+      if (s1CurrentToken) {
+        document.getElementById('s2Input').value = `https://www.google.com/share.google?q=${s1CurrentToken}`;
+        switchSection(2);
+        showToast('Switched & Transferred to Section 2!');
+      }
+    });
+
+    document.getElementById('s1SendToSalt').addEventListener('click', () => {
+      if (s1CurrentToken) {
+        document.getElementById('s3Input').value = `https://www.google.com/share.google?q=${s1CurrentToken}`;
+        switchSection(3);
+        showToast('Switched & Transferred to Section 3!');
+      }
+    });
+
+    // ==========================================
+    // SECTION 2 LOGIC (GOOGLE DOMAINS)
+    // ==========================================
+    let s2GeneratedLinks = [];
+    const s2Input = document.getElementById('s2Input');
+    const s2CustomQty = document.getElementById('s2CustomQty');
+    const s2BtnGenerate = document.getElementById('s2BtnGenerate');
+    const s2Results = document.getElementById('s2Results');
+    const s2ResultsCount = document.getElementById('s2ResultsCount');
+    const s2LinksList = document.getElementById('s2LinksList');
+
+    document.querySelectorAll('#s2Pills .pill-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#s2Pills .pill-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        s2CustomQty.value = btn.getAttribute('data-qty');
+      });
+    });
+
+    s2CustomQty.addEventListener('input', () => {
+      document.querySelectorAll('#s2Pills .pill-btn').forEach(b => b.classList.remove('active'));
+    });
+
+    s2BtnGenerate.addEventListener('click', () => {
+      const token = extractToken(s2Input.value);
+      if (!token) {
+        alert('Please enter a valid link or token in Section 2 first.');
+        return;
+      }
+
+      let count = parseInt(s2CustomQty.value, 10);
+      if (isNaN(count) || count < 1) count = 5;
+
+      s2GeneratedLinks = [];
+      for (let i = 0; i < count; i++) {
+        const dom = GOOGLE_DOMAINS[i % GOOGLE_DOMAINS.length];
+        const url = `https://${dom.domain}/share.google?q=${token}`;
+        s2GeneratedLinks.push({
+          num: i + 1,
+          flag: dom.flag,
+          country: dom.country,
+          domain: dom.domain,
+          url
+        });
+      }
+
+      s2ResultsCount.textContent = `${s2GeneratedLinks.length} Domains Generated`;
+      s2LinksList.innerHTML = s2GeneratedLinks.map(item => `
+        <div class="link-item">
+          <div class="link-item-left">
+            <span class="link-num">${item.num}</span>
+            <span style="font-size:1.05rem;">${item.flag}</span>
+            <span class="link-badge">${item.country}</span>
+            <a href="${item.url}" target="_blank" class="link-url-text" title="${item.url}">${item.url}</a>
+          </div>
+          <div class="link-item-actions">
+            <button class="btn-item btn-copy-row" data-url="${item.url}">Copy</button>
+            <a href="${item.url}" target="_blank" class="btn-item">Test ↗</a>
+          </div>
+        </div>
+      `).join('');
+
+      s2Results.classList.add('visible');
+      attachItemCopyEvents(s2LinksList);
+      showToast(`Generated ${s2GeneratedLinks.length} Google domain links!`);
+    });
+
+    document.getElementById('s2CopyAll').addEventListener('click', (e) => {
+      copyText(s2GeneratedLinks.map(l => l.url).join('\n'), e.currentTarget);
+    });
+
+    document.getElementById('s2Download').addEventListener('click', () => {
+      downloadTxt(`google_domains_${s2GeneratedLinks.length}.txt`, s2GeneratedLinks.map(l => l.url).join('\n'));
+    });
+
+    // ==========================================
+    // SECTION 3 LOGIC (SALT MULTIPLIER)
+    // ==========================================
+    let s3GeneratedLinks = [];
+    const s3Input = document.getElementById('s3Input');
+    const s3CustomQty = document.getElementById('s3CustomQty');
+    const s3BtnGenerate = document.getElementById('s3BtnGenerate');
+    const s3Results = document.getElementById('s3Results');
+    const s3ResultsCount = document.getElementById('s3ResultsCount');
+    const s3LinksList = document.getElementById('s3LinksList');
+
+    document.querySelectorAll('#s3Pills .pill-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#s3Pills .pill-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        s3CustomQty.value = btn.getAttribute('data-qty');
+      });
+    });
+
+    s3CustomQty.addEventListener('input', () => {
+      document.querySelectorAll('#s3Pills .pill-btn').forEach(b => b.classList.remove('active'));
+    });
+
+    s3BtnGenerate.addEventListener('click', () => {
+      const token = extractToken(s3Input.value);
+      if (!token) {
+        alert('Please enter a valid link or token in Section 3 first.');
+        return;
+      }
+
+      let count = parseInt(s3CustomQty.value, 10);
+      if (isNaN(count) || count < 1) count = 5;
+
+      s3GeneratedLinks = [];
+      for (let i = 0; i < count; i++) {
+        const key = SALT_KEYS[i % SALT_KEYS.length];
+        const salt = generateEntropySalt(10);
+        const url = `https://www.google.com/share.google?q=${token}&${key}=${salt}`;
+        s3GeneratedLinks.push({
+          num: i + 1,
+          key,
+          salt,
+          url
+        });
+      }
+
+      s3ResultsCount.textContent = `${s3GeneratedLinks.length} Salted Links Generated`;
+      s3LinksList.innerHTML = s3GeneratedLinks.map(item => `
+        <div class="link-item">
+          <div class="link-item-left">
+            <span class="link-num">${item.num}</span>
+            <span class="link-badge">&amp;${item.key}=${item.salt}</span>
+            <a href="${item.url}" target="_blank" class="link-url-text" title="${item.url}">${item.url}</a>
+          </div>
+          <div class="link-item-actions">
+            <button class="btn-item btn-copy-row" data-url="${item.url}">Copy</button>
+            <a href="${item.url}" target="_blank" class="btn-item">Test ↗</a>
+          </div>
+        </div>
+      `).join('');
+
+      s3Results.classList.add('visible');
+      attachItemCopyEvents(s3LinksList);
+      showToast(`Generated ${s3GeneratedLinks.length} unique salted links!`);
+    });
+
+    document.getElementById('s3CopyAll').addEventListener('click', (e) => {
+      copyText(s3GeneratedLinks.map(l => l.url).join('\n'), e.currentTarget);
+    });
+
+    document.getElementById('s3Download').addEventListener('click', () => {
+      downloadTxt(`google_salted_links_${s3GeneratedLinks.length}.txt`, s3GeneratedLinks.map(l => l.url).join('\n'));
+    });
+
+    function attachItemCopyEvents(container) {
+      container.querySelectorAll('.btn-copy-row').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const url = e.currentTarget.getAttribute('data-url');
+          copyText(url, e.currentTarget);
+        });
+      });
+    }
+
+    // Default initialization: Always open on Home Page
+    switchSection('home');
+  </script>
+</body>
+</html>
