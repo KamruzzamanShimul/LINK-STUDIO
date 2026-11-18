@@ -1158,6 +1158,12 @@
           <span>Salt Multiplier</span>
           <span class="sidebar-btn-badge">Entropy</span>
         </button>
+
+        <button class="sidebar-btn" id="btnNav4" onclick="switchSection(4)">
+          <span class="sidebar-btn-icon">🔒</span>
+          <span>FB Shield Cloaker</span>
+          <span class="sidebar-btn-badge" style="background:#10b981; color:#fff;">Anti-Detect</span>
+        </button>
       </nav>
 
       <!-- Live Wallpaper Controller Widget -->
@@ -1285,6 +1291,7 @@
                 <a href="#" target="_blank" class="btn-glass" id="s1TestGoogle">↗ Test Link</a>
                 <button class="send-down-btn" id="s1SendToDomains">↳ Send to Section 2 (Domains)</button>
                 <button class="send-down-btn" id="s1SendToSalt">↳ Send to Section 3 (Salt)</button>
+                <button class="send-down-btn" id="s1SendToCloak">↳ Send to Section 4 (FB Shield)</button>
               </div>
             </div>
           </div>
@@ -1392,6 +1399,84 @@
             </div>
           </div>
           <div class="links-table" id="s3LinksList"></div>
+        </div>
+      </div>
+    
+      <!-- ========================================== -->
+      <!-- SECTION 4: FACEBOOK SHIELD CLOAKER         -->
+      <!-- ========================================== -->
+      <div class="glass-card tab-hidden" id="section4">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title">Facebook Anti-Detect Shield Cloaker</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="s4Input">Input Destination Offer Link or Token</label>
+          <input 
+            type="text" 
+            id="s4Input" 
+            class="input-box" 
+            placeholder="Paste your target link (e.g. Google share link, token or offer URL)..." 
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Choose Facebook Preview Disguise (Clean Open Graph Preset)</label>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px;">
+            <label style="background:rgba(255,255,255,0.03); border:1px solid var(--glass-border); padding:12px; cursor:pointer; display:flex; align-items:center; gap:10px;">
+              <input type="radio" name="cloakerPreset" value="g" checked />
+              <div>
+                <div style="font-weight:700; color:#fff; font-size:0.86rem;">🔍 Google Search</div>
+                <div style="font-size:0.72rem; color:var(--text-dim);">Google logo & verified title</div>
+              </div>
+            </label>
+            <label style="background:rgba(255,255,255,0.03); border:1px solid var(--glass-border); padding:12px; cursor:pointer; display:flex; align-items:center; gap:10px;">
+              <input type="radio" name="cloakerPreset" value="v" />
+              <div>
+                <div style="font-weight:700; color:#fff; font-size:0.86rem;">▶️ HD Video Stream</div>
+                <div style="font-size:0.72rem; color:var(--text-dim);">Streaming video card & play icon</div>
+              </div>
+            </label>
+            <label style="background:rgba(255,255,255,0.03); border:1px solid var(--glass-border); padding:12px; cursor:pointer; display:flex; align-items:center; gap:10px;">
+              <input type="radio" name="cloakerPreset" value="news" />
+              <div>
+                <div style="font-weight:700; color:#fff; font-size:0.86rem;">📰 Breaking News</div>
+                <div style="font-size:0.72rem; color:var(--text-dim);">Verified news portal card</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <button id="s4BtnGenerate" class="btn-gradient">
+            🔒 Generate Shield Links
+          </button>
+
+          <div class="qty-selector">
+            <span class="qty-label">Quantity:</span>
+            <div class="pill-group" id="s4Pills">
+              <button type="button" class="pill-btn active" data-qty="1">1</button>
+              <button type="button" class="pill-btn" data-qty="5">5</button>
+              <button type="button" class="pill-btn" data-qty="10">10</button>
+              <button type="button" class="pill-btn" data-qty="25">25</button>
+            </div>
+            <input type="number" id="s4CustomQty" class="custom-qty-box" value="1" min="1" max="100" />
+          </div>
+        </div>
+
+        <!-- Section 4 Results -->
+        <div id="s4Results" class="results-area">
+          <div class="results-header-bar">
+            <span class="results-count" id="s4ResultsCount">0 Shield Links Generated</span>
+            <div class="results-actions">
+              <button class="btn-glass" id="s4CopyAll">📋 Copy All</button>
+              <button class="btn-glass" id="s4Download">💾 .TXT</button>
+            </div>
+          </div>
+          <div class="links-table" id="s4LinksList"></div>
         </div>
       </div>
     </main>
@@ -1613,38 +1698,40 @@
       const btn1 = document.getElementById('btnNav1');
       const btn2 = document.getElementById('btnNav2');
       const btn3 = document.getElementById('btnNav3');
+      const btn4 = document.getElementById('btnNav4');
 
       const secHome = document.getElementById('sectionHome');
       const sec1 = document.getElementById('section1');
       const sec2 = document.getElementById('section2');
       const sec3 = document.getElementById('section3');
+      const sec4 = document.getElementById('section4');
 
-      [btnHome, btn1, btn2, btn3].forEach(b => { if (b) b.classList.remove('active'); });
+      [btnHome, btn1, btn2, btn3, btn4].forEach(b => { if (b) b.classList.remove('active'); });
 
       if (target === 'home') {
         btnHome.classList.add('active');
         secHome.classList.remove('tab-hidden');
-        sec1.classList.add('tab-hidden');
-        sec2.classList.add('tab-hidden');
-        sec3.classList.add('tab-hidden');
+        [sec1, sec2, sec3, sec4].forEach(s => { if (s) s.classList.add('tab-hidden'); });
       } else if (target === 1) {
         btn1.classList.add('active');
         secHome.classList.add('tab-hidden');
         sec1.classList.remove('tab-hidden');
-        sec2.classList.add('tab-hidden');
-        sec3.classList.add('tab-hidden');
+        [sec2, sec3, sec4].forEach(s => { if (s) s.classList.add('tab-hidden'); });
       } else if (target === 2) {
         btn2.classList.add('active');
         secHome.classList.add('tab-hidden');
-        sec1.classList.add('tab-hidden');
         sec2.classList.remove('tab-hidden');
-        sec3.classList.add('tab-hidden');
+        [sec1, sec3, sec4].forEach(s => { if (s) s.classList.add('tab-hidden'); });
       } else if (target === 3) {
         btn3.classList.add('active');
         secHome.classList.add('tab-hidden');
-        sec1.classList.add('tab-hidden');
-        sec2.classList.add('tab-hidden');
         sec3.classList.remove('tab-hidden');
+        [sec1, sec2, sec4].forEach(s => { if (s) s.classList.add('tab-hidden'); });
+      } else if (target === 4) {
+        btn4.classList.add('active');
+        secHome.classList.add('tab-hidden');
+        sec4.classList.remove('tab-hidden');
+        [sec1, sec2, sec3].forEach(s => { if (s) s.classList.add('tab-hidden'); });
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1900,6 +1987,115 @@
         });
       });
     }
+
+    
+    // Send to Section 4 from Section 1
+    const s1SendToCloak = document.getElementById('s1SendToCloak');
+    if (s1SendToCloak) {
+      s1SendToCloak.addEventListener('click', () => {
+        if (s1CurrentToken) {
+          document.getElementById('s4Input').value = s1CurrentToken;
+          switchSection(4);
+          showToast('Switched & Transferred to Section 4 (Shield)!');
+        }
+      });
+    }
+
+    // ==========================================
+    // SECTION 4 LOGIC (FB SHIELD CLOAKER)
+    // ==========================================
+    let s4GeneratedLinks = [];
+    const s4Input = document.getElementById('s4Input');
+    const s4CustomQty = document.getElementById('s4CustomQty');
+    const s4BtnGenerate = document.getElementById('s4BtnGenerate');
+    const s4Results = document.getElementById('s4Results');
+    const s4ResultsCount = document.getElementById('s4ResultsCount');
+    const s4LinksList = document.getElementById('s4LinksList');
+
+    document.querySelectorAll('#s4Pills .pill-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#s4Pills .pill-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        s4CustomQty.value = btn.getAttribute('data-qty');
+      });
+    });
+
+    s4CustomQty.addEventListener('input', () => {
+      document.querySelectorAll('#s4Pills .pill-btn').forEach(b => b.classList.remove('active'));
+    });
+
+    s4BtnGenerate.addEventListener('click', () => {
+      let raw = s4Input.value.trim();
+      if (!raw) {
+        alert('Please enter a target link or token in Section 4 first.');
+        return;
+      }
+
+      const presetRadio = document.querySelector('input[name="cloakerPreset"]:checked');
+      const preset = presetRadio ? presetRadio.value : 'g';
+      const presetName = preset === 'g' ? 'Google Search' : (preset === 'v' ? 'Video Player' : 'Breaking News');
+
+      let destParam = '';
+      if (/^https?:\/\//i.test(raw)) {
+        destParam = encodeURIComponent(raw);
+      } else {
+        const token = extractToken(raw);
+        destParam = encodeURIComponent(token || raw);
+      }
+
+      let count = parseInt(s4CustomQty.value, 10);
+      if (isNaN(count) || count < 1) count = 1;
+
+      const baseDomain = window.location.origin.includes('github.io')
+        ? 'https://kamruzzamanshimul.github.io/LINK-STUDIO'
+        : window.location.origin + window.location.pathname.replace(/[^/]*$/, '').replace(/\/$/, '');
+
+      s4GeneratedLinks = [];
+      for (let i = 0; i < count; i++) {
+        const key = SALT_KEYS[i % SALT_KEYS.length];
+        const salt = generateEntropySalt(8);
+        const url = count === 1 
+          ? `${baseDomain}/${preset}.html?to=${destParam}`
+          : `${baseDomain}/${preset}.html?to=${destParam}&${key}=${salt}`;
+        
+        const fbDebugUrl = `https://developers.facebook.com/tools/debug/?q=${encodeURIComponent(url)}`;
+
+        s4GeneratedLinks.push({
+          num: i + 1,
+          presetName,
+          url,
+          fbDebugUrl
+        });
+      }
+
+      s4ResultsCount.textContent = `${s4GeneratedLinks.length} Shield Links Generated`;
+      s4LinksList.innerHTML = s4GeneratedLinks.map(item => `
+        <div class="link-item">
+          <div class="link-item-left">
+            <span class="link-num">${item.num}</span>
+            <span class="link-badge" style="background:rgba(16,185,129,0.12); border-color:rgba(16,185,129,0.3); color:#10b981;">${item.presetName}</span>
+            <a href="${item.url}" target="_blank" class="link-url-text" title="${item.url}">${item.url}</a>
+          </div>
+          <div class="link-item-actions">
+            <button class="btn-item btn-copy-row" data-url="${item.url}">Copy</button>
+            <a href="${item.url}" target="_blank" class="btn-item">Test ↗</a>
+            <a href="${item.fbDebugUrl}" target="_blank" class="btn-item" style="color:#60a5fa; border-color:rgba(96,165,250,0.3);" title="Test in Facebook Debugger">FB Debug ↗</a>
+          </div>
+        </div>
+      `).join('');
+
+      s4Results.classList.add('visible');
+      attachItemCopyEvents(s4LinksList);
+      showToast(`Generated ${s4GeneratedLinks.length} Facebook-Safe Shield Links!`);
+    });
+
+    document.getElementById('s4CopyAll').addEventListener('click', (e) => {
+      copyText(s4GeneratedLinks.map(l => l.url).join('\n'), e.currentTarget);
+    });
+
+    document.getElementById('s4Download').addEventListener('click', () => {
+      downloadTxt(`fb_shield_links_${s4GeneratedLinks.length}.txt`, s4GeneratedLinks.map(l => l.url).join('\n'));
+    });
 
     // Default initialization: Always open on Home Page
     switchSection('home');

