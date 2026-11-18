@@ -958,6 +958,52 @@
       accent-color: #6366f1;
       cursor: pointer;
     }
+    
+    /* Modern Cyber iOS Toggle Switch */
+    .pic-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+    .pic-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+    .pic-switch-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #272a34;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 24px !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .pic-switch-slider::before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #ffffff;
+      border-radius: 50% !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .pic-switch input:checked + .pic-switch-slider {
+      background-color: #10b981 !important;
+      border-color: #10b981 !important;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.6) !important;
+    }
+    .pic-switch input:checked + .pic-switch-slider::before {
+      transform: translateX(20px);
+      background-color: #ffffff !important;
+    }
+
     .pic-toggle-item {
       display: flex;
       align-items: center;
@@ -1680,17 +1726,17 @@
 
               <div class="pic-toggle-item">
                 <span>▶️ Frosted Play Button</span>
-                <label class="switch" style="position:relative; width:36px; height:20px; display:inline-block;">
-                  <input type="checkbox" id="chkPlayBtn" checked style="opacity:0; width:0; height:0;" />
-                  <span class="slider" style="position:absolute; inset:0; background:#374151; border-radius:20px; cursor:pointer; transition:.3s;"></span>
+                <label class="pic-switch">
+                  <input type="checkbox" id="chkPlayBtn" checked />
+                  <span class="pic-switch-slider"></span>
                 </label>
               </div>
 
               <div class="pic-toggle-item">
                 <span>🌟 4K ULTRA HD Badge</span>
-                <label class="switch" style="position:relative; width:36px; height:20px; display:inline-block;">
-                  <input type="checkbox" id="chkBadge" checked style="opacity:0; width:0; height:0;" />
-                  <span class="slider" style="position:absolute; inset:0; background:#374151; border-radius:20px; cursor:pointer; transition:.3s;"></span>
+                <label class="pic-switch">
+                  <input type="checkbox" id="chkBadge" checked />
+                  <span class="pic-switch-slider"></span>
                 </label>
               </div>
 
@@ -1754,11 +1800,11 @@
               </button>
 
               <button class="btn-gradient" id="btnExportVideo" style="width:100%; margin-top:8px; justify-content:center; background:#10b981; font-size:0.8rem;">
-                🎬 Convert to 2-Sec Video (MP4)
+                🎬 Create 5-Sec Real Video (MP4)
               </button>
 
               <div style="font-size:0.68rem; color:#8b92a0; margin-top:10px; line-height:1.4; border-left:2px solid #10b981; padding-left:6px;">
-                💡 <strong>Ad Tip:</strong> Use <em>2-Sec Video</em> for Facebook Ads to bypass fake play button static image bans.
+                💡 <strong>Ad Tip:</strong> Use <em>5-Sec Real Video</em> for Facebook Ads to bypass fake play button static image bans.
               </div>
             </div>
           </div>
@@ -2770,44 +2816,160 @@
       };
     }
 
+    function renderPicCanvasWithPulse(targetCanvas, pulse = 1.0) {
+      if (!picCurrentImg || !targetCanvas) return;
+      const targetCtx = targetCanvas.getContext('2d');
+      const w = targetCanvas.width;
+      const h = targetCanvas.height;
+
+      // Clear
+      targetCtx.clearRect(0, 0, w, h);
+
+      // Draw base photo with opacity & filters
+      targetCtx.save();
+      targetCtx.globalAlpha = picConfig.imgOpacity;
+      const filters = [];
+      if (picConfig.imgBlur > 0) {
+        const blurPx = picConfig.imgBlur * (w / 720);
+        filters.push(`blur(${blurPx}px)`);
+      }
+      if (picConfig.imgBrightness !== 100) filters.push(`brightness(${picConfig.imgBrightness}%)`);
+      if (picConfig.imgContrast !== 100) filters.push(`contrast(${picConfig.imgContrast}%)`);
+      if (filters.length > 0) targetCtx.filter = filters.join(' ');
+      targetCtx.drawImage(picCurrentImg, 0, 0, w, h);
+      targetCtx.restore();
+
+      const scale = w / 720;
+      if (picConfig.showBadge) {
+        drawPic4KBadge(targetCtx, w, h, picConfig.badgeSize * scale);
+      }
+      if (picConfig.showPlay) {
+        drawPicPlayButton(targetCtx, w, h, (picConfig.playSize * scale) * pulse, picConfig.playOpacity, picConfig.playY);
+      }
+    }
+
     const btnExportVideo = document.getElementById('btnExportVideo');
     if (btnExportVideo) {
       btnExportVideo.onclick = () => {
         if (!picCurrentImg) return alert('Please upload an image first!');
+
         const expCanvas = document.createElement('canvas');
-        renderPicCanvas(expCanvas, true);
+        let w = picCurrentImg.naturalWidth;
+        let h = picCurrentImg.naturalHeight;
+        if (picConfig.exportRes === '4k') {
+          const ratio = h / w;
+          w = ratio >= 1 ? 2160 : 3840;
+          h = Math.round(w * ratio);
+        } else if (picConfig.exportRes === '1080p') {
+          const ratio = h / w;
+          w = ratio >= 1 ? 1080 : 1920;
+          h = Math.round(w * ratio);
+        }
+        expCanvas.width = w;
+        expCanvas.height = h;
+
         const btn = document.getElementById('btnExportVideo');
-        const origText = btn.textContent;
-        btn.textContent = '⏳ Rendering 2-Sec Video...';
+        const origText = btn.innerHTML;
         btn.disabled = true;
 
-        const stream = expCanvas.captureStream(30);
+        const preferredTypes = [
+          'video/mp4;codecs=avc1,mp4a.40.2',
+          'video/mp4;codecs=h264',
+          'video/mp4',
+          'video/webm;codecs=h264',
+          'video/webm;codecs=vp9',
+          'video/webm'
+        ];
+        let selectedMime = '';
+        for (const t of preferredTypes) {
+          if (MediaRecorder.isTypeSupported(t)) {
+            selectedMime = t;
+            break;
+          }
+        }
+        if (!selectedMime) selectedMime = 'video/webm';
+
+        let audioTrack = null;
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            const actx = new AudioContext();
+            const dest = actx.createMediaStreamDestination();
+            const osc = actx.createOscillator();
+            const gain = actx.createGain();
+            gain.gain.value = 0.0001;
+            osc.connect(gain);
+            gain.connect(dest);
+            osc.start();
+            audioTrack = dest.stream.getAudioTracks()[0];
+          }
+        } catch (e) {}
+
+        const canvasStream = expCanvas.captureStream(30);
+        const tracks = [...canvasStream.getVideoTracks()];
+        if (audioTrack) tracks.push(audioTrack);
+        const combinedStream = new MediaStream(tracks);
+
         let recorder;
         try {
-          recorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+          recorder = new MediaRecorder(combinedStream, {
+            mimeType: selectedMime,
+            videoBitsPerSecond: 8000000
+          });
         } catch (e) {
-          recorder = new MediaRecorder(stream);
+          recorder = new MediaRecorder(combinedStream);
         }
 
         const chunks = [];
-        recorder.ondataavailable = e => chunks.push(e.data);
-        recorder.onstop = () => {
-          const blob = new Blob(chunks, { type: recorder.mimeType || 'video/webm' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `video_ad_creative_${Date.now()}.webm`;
-          a.click();
-          URL.revokeObjectURL(url);
-          btn.textContent = origText;
-          btn.disabled = false;
-          showToast('Video creative exported successfully!');
+        recorder.ondataavailable = e => {
+          if (e.data && e.data.size > 0) chunks.push(e.data);
         };
 
-        recorder.start();
+        const DURATION_SEC = 5;
+        const DURATION_MS = DURATION_SEC * 1000;
+        const startTime = performance.now();
+        let animId;
+
+        function drawFrame(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / DURATION_MS, 1.0);
+          const pulse = 1.0 + 0.035 * Math.sin(progress * Math.PI * 4);
+          renderPicCanvasWithPulse(expCanvas, pulse);
+
+          const secElapsed = Math.min(DURATION_SEC, Math.floor(elapsed / 1000) + 1);
+          btn.innerHTML = `⏳ Rendering 5-Sec Video (${secElapsed}s / ${DURATION_SEC}s)...`;
+
+          if (progress < 1.0) {
+            animId = requestAnimationFrame(drawFrame);
+          }
+        }
+
+        recorder.onstop = () => {
+          cancelAnimationFrame(animId);
+          btn.innerHTML = '⏳ Finalizing MP4...';
+          setTimeout(() => {
+            const isMp4 = selectedMime.includes('mp4');
+            const blob = new Blob(chunks, { type: selectedMime });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `real_video_ad_5sec_${Date.now()}.${isMp4 ? 'mp4' : 'mp4'}`;
+            a.click();
+            URL.revokeObjectURL(url);
+            btn.innerHTML = origText;
+            btn.disabled = false;
+            showToast('✓ 5-Second Real Video MP4 Downloaded!');
+          }, 350);
+        };
+
+        recorder.start(100);
+        animId = requestAnimationFrame(drawFrame);
+
         setTimeout(() => {
-          recorder.stop();
-        }, 2000);
+          if (recorder.state === 'recording') {
+            recorder.stop();
+          }
+        }, DURATION_MS);
       };
     }
 
