@@ -867,6 +867,117 @@
     }
 
     /* Output Results Area */
+    
+    /* ========================================== */
+    /* PIC EDIT (4K PHOTO STYLER) STYLES          */
+    /* ========================================== */
+    .pic-workspace {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      width: 100%;
+    }
+    @media (max-width: 900px) {
+      .pic-workspace { grid-template-columns: 1fr; }
+    }
+    .pic-canvas-box {
+      position: relative;
+      background: #000000;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 440px;
+      max-height: 640px;
+    }
+    #picCanvas {
+      max-width: 100%;
+      max-height: 620px;
+      object-fit: contain;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    .pic-drop-zone {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: rgba(10, 12, 16, 0.88);
+      backdrop-filter: blur(6px);
+      transition: var(--transition);
+      z-index: 5;
+    }
+    .pic-drop-zone:hover {
+      background: rgba(10, 12, 16, 0.72);
+      border: 1px dashed #6366f1;
+    }
+    .pic-drop-zone.has-image {
+      display: none;
+    }
+    .pic-ctrl-section {
+      background: rgba(14, 16, 22, 0.85);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .pic-ctrl-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #c084fc;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pic-slider-row {
+      margin-bottom: 12px;
+    }
+    .pic-slider-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .pic-slider-val {
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .pic-slider {
+      width: 100%;
+      accent-color: #6366f1;
+      cursor: pointer;
+    }
+    .pic-toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      margin-bottom: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .pic-btn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
     .results-area {
       display: none;
       margin-top: 24px;
@@ -1163,6 +1274,12 @@
           <span class="sidebar-btn-icon">🔒</span>
           <span>FB Shield Cloaker</span>
           <span class="sidebar-btn-badge" style="background:#10b981; color:#fff;">Anti-Detect</span>
+        </button>
+
+        <button class="sidebar-btn" id="btnNav5" onclick="switchSection(5)">
+          <span class="sidebar-btn-icon">📸</span>
+          <span>Pic Edit</span>
+          <span class="sidebar-btn-badge" style="background:#f59e0b; color:#000; font-weight:800;">4K Play</span>
         </button>
       </nav>
 
@@ -1479,6 +1596,174 @@
           <div class="links-table" id="s4LinksList"></div>
         </div>
       </div>
+    
+      <!-- ========================================== -->
+      <!-- SECTION 5: PIC EDIT (4K PHOTO & PLAY STYLER)-->
+      <!-- ========================================== -->
+      <div class="glass-card tab-hidden" id="section5">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title">Pic Edit // 4K Photo Styler & Overlay Suite</div>
+          </div>
+          <div style="font-size:0.75rem; color:#f59e0b; font-weight:700;">★ 4K ULTRA HD + FROSTED PLAY</div>
+        </div>
+
+        <div class="pic-workspace">
+          <!-- Left: Canvas Area -->
+          <div>
+            <div class="pic-canvas-box" id="picCanvasContainer">
+              <canvas id="picCanvas"></canvas>
+              <div class="pic-drop-zone" id="picDropZone">
+                <div style="font-size: 42px; margin-bottom: 8px;">📸</div>
+                <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px; color:#fff;">DRAG & DROP IMAGE HERE</div>
+                <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 14px;">or click to browse from device (JPG, PNG, WebP)</div>
+                <button class="btn-gradient" type="button" onclick="document.getElementById('picFileInput').click()">Choose Image</button>
+              </div>
+            </div>
+            <input type="file" id="picFileInput" accept="image/*" style="display: none;" />
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+              <span id="picResBadge" style="font-size: 11px; color: #c084fc; font-family:'JetBrains Mono', monospace; font-weight:600;">Original: No image</span>
+              <button class="btn-glass" style="padding: 6px 14px; font-size: 0.78rem;" onclick="document.getElementById('picFileInput').click()">🔄 Change Image</button>
+            </div>
+          </div>
+
+          <!-- Right: Controls Area -->
+          <div>
+            <!-- Image Filters & Opacity (Requested Features) -->
+            <div class="pic-ctrl-section">
+              <div class="pic-ctrl-title">
+                <span>🎨 Picture Adjustments</span>
+                <button id="btnResetPicAdjust" style="background:transparent; border:none; color:var(--text-dim); font-size:0.7rem; cursor:pointer;" title="Reset adjustments">↺ Reset</button>
+              </div>
+
+              <!-- Picture Opacity -->
+              <div class="pic-slider-row">
+                <div class="pic-slider-label">
+                  <span>Picture Opacity</span>
+                  <span class="pic-slider-val" id="valImgOpacity">100%</span>
+                </div>
+                <input type="range" class="pic-slider" id="rngImgOpacity" min="10" max="100" value="100" />
+              </div>
+
+              <!-- Picture Blur -->
+              <div class="pic-slider-row">
+                <div class="pic-slider-label">
+                  <span>Picture Blur</span>
+                  <span class="pic-slider-val" id="valImgBlur">0px</span>
+                </div>
+                <input type="range" class="pic-slider" id="rngImgBlur" min="0" max="25" value="0" />
+              </div>
+
+              <!-- Picture Brightness -->
+              <div class="pic-slider-row">
+                <div class="pic-slider-label">
+                  <span>Brightness</span>
+                  <span class="pic-slider-val" id="valImgBrightness">100%</span>
+                </div>
+                <input type="range" class="pic-slider" id="rngImgBrightness" min="50" max="150" value="100" />
+              </div>
+
+              <!-- Picture Contrast -->
+              <div class="pic-slider-row">
+                <div class="pic-slider-label">
+                  <span>Contrast</span>
+                  <span class="pic-slider-val" id="valImgContrast">100%</span>
+                </div>
+                <input type="range" class="pic-slider" id="rngImgContrast" min="50" max="150" value="100" />
+              </div>
+            </div>
+
+            <!-- Overlays -->
+            <div class="pic-ctrl-section">
+              <div class="pic-ctrl-title">Overlay Elements</div>
+
+              <div class="pic-toggle-item">
+                <span>▶️ Frosted Play Button</span>
+                <label class="switch" style="position:relative; width:36px; height:20px; display:inline-block;">
+                  <input type="checkbox" id="chkPlayBtn" checked style="opacity:0; width:0; height:0;" />
+                  <span class="slider" style="position:absolute; inset:0; background:#374151; border-radius:20px; cursor:pointer; transition:.3s;"></span>
+                </label>
+              </div>
+
+              <div class="pic-toggle-item">
+                <span>🌟 4K ULTRA HD Badge</span>
+                <label class="switch" style="position:relative; width:36px; height:20px; display:inline-block;">
+                  <input type="checkbox" id="chkBadge" checked style="opacity:0; width:0; height:0;" />
+                  <span class="slider" style="position:absolute; inset:0; background:#374151; border-radius:20px; cursor:pointer; transition:.3s;"></span>
+                </label>
+              </div>
+
+              <div class="pic-slider-row" style="margin-top:12px;">
+                <div class="pic-slider-label">
+                  <span>Play Button Size</span>
+                  <span class="pic-slider-val" id="valPlaySize">160px</span>
+                </div>
+                <input type="range" class="pic-slider" id="playSize" min="70" max="320" value="160" />
+              </div>
+
+              <div class="pic-slider-row">
+                <div class="pic-slider-label">
+                  <span>Play Button Opacity</span>
+                  <span class="pic-slider-val" id="valPlayOpacity">75%</span>
+                </div>
+                <input type="range" class="pic-slider" id="playOpacity" min="30" max="100" value="75" />
+              </div>
+
+              <div class="pic-slider-row">
+                <div class="pic-slider-label">
+                  <span>Vertical Position</span>
+                  <span class="pic-slider-val" id="valPlayY">50%</span>
+                </div>
+                <input type="range" class="pic-slider" id="playY" min="20" max="80" value="50" />
+              </div>
+
+              <div class="pic-slider-row">
+                <div class="pic-slider-label">
+                  <span>4K Badge Size</span>
+                  <span class="pic-slider-val" id="valBadgeSize">110px</span>
+                </div>
+                <input type="range" class="pic-slider" id="badgeSize" min="60" max="220" value="110" />
+              </div>
+            </div>
+
+            <!-- Export Section -->
+            <div class="pic-ctrl-section">
+              <div class="pic-ctrl-title">Export Options</div>
+
+              <div class="field-group" style="margin-bottom:10px;">
+                <label class="field-label" style="font-size:0.74rem;">Export Resolution</label>
+                <select id="exportRes" class="input-box" style="padding:6px 10px; font-size:0.8rem;">
+                  <option value="original">Original Image Resolution</option>
+                  <option value="4k">Force True 4K Ultra HD (2160 × 3840)</option>
+                  <option value="1080p">Force 1080p Full HD (1080 × 1920)</option>
+                </select>
+              </div>
+
+              <div class="pic-btn-grid">
+                <button class="btn-gradient" id="btnDownloadJpg" style="background:#f59e0b; color:#000; font-weight:700; font-size:0.8rem; justify-content:center;">
+                  🖼️ Download JPG
+                </button>
+                <button class="btn-gradient" id="btnDownloadPng" style="font-size:0.8rem; justify-content:center;">
+                  🖼️ Download PNG
+                </button>
+              </div>
+
+              <button class="btn-glass" id="btnDownloadOverlay" style="width:100%; margin-top:8px; justify-content:center; font-size:0.78rem;">
+                ✨ Download Overlay Only (PNG)
+              </button>
+
+              <button class="btn-gradient" id="btnExportVideo" style="width:100%; margin-top:8px; justify-content:center; background:#10b981; font-size:0.8rem;">
+                🎬 Convert to 2-Sec Video (MP4)
+              </button>
+
+              <div style="font-size:0.68rem; color:#8b92a0; margin-top:10px; line-height:1.4; border-left:2px solid #10b981; padding-left:6px;">
+                💡 <strong>Ad Tip:</strong> Use <em>2-Sec Video</em> for Facebook Ads to bypass fake play button static image bans.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     </div> <!-- end .main-content-wrapper -->
   </div> <!-- end .dashboard-layout -->
@@ -1699,14 +1984,16 @@
       const btn2 = document.getElementById('btnNav2');
       const btn3 = document.getElementById('btnNav3');
       const btn4 = document.getElementById('btnNav4');
+      const btn5 = document.getElementById('btnNav5');
 
       const secHome = document.getElementById('sectionHome');
       const sec1 = document.getElementById('section1');
       const sec2 = document.getElementById('section2');
       const sec3 = document.getElementById('section3');
       const sec4 = document.getElementById('section4');
+      const sec5 = document.getElementById('section5');
 
-      [btnHome, btn1, btn2, btn3, btn4].forEach(b => { if (b) b.classList.remove('active'); });
+      [btnHome, btn1, btn2, btn3, btn4, btn5].forEach(b => { if (b) b.classList.remove('active'); });
 
       if (target === 'home') {
         btnHome.classList.add('active');
@@ -1731,7 +2018,12 @@
         btn4.classList.add('active');
         secHome.classList.add('tab-hidden');
         sec4.classList.remove('tab-hidden');
-        [sec1, sec2, sec3].forEach(s => { if (s) s.classList.add('tab-hidden'); });
+        [sec1, sec2, sec3, sec5].forEach(s => { if (s) s.classList.add('tab-hidden'); });
+      } else if (target === 5) {
+        btn5.classList.add('active');
+        secHome.classList.add('tab-hidden');
+        sec5.classList.remove('tab-hidden');
+        [sec1, sec2, sec3, sec4].forEach(s => { if (s) s.classList.add('tab-hidden'); });
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2096,6 +2388,428 @@
     document.getElementById('s4Download').addEventListener('click', () => {
       downloadTxt(`fb_shield_links_${s4GeneratedLinks.length}.txt`, s4GeneratedLinks.map(l => l.url).join('\n'));
     });
+
+    
+    // ==========================================
+    // SECTION 5 LOGIC (PIC EDIT - 4K PLAY STYLER)
+    // ==========================================
+    const picCanvas = document.getElementById('picCanvas');
+    const picCtx = picCanvas ? picCanvas.getContext('2d') : null;
+    const picFileInput = document.getElementById('picFileInput');
+    const picDropZone = document.getElementById('picDropZone');
+    const picResBadge = document.getElementById('picResBadge');
+    const picContainer = document.getElementById('picCanvasContainer');
+
+    let picCurrentImg = null;
+
+    const picConfig = {
+      showPlay: true,
+      showBadge: true,
+      playSize: 160,
+      playOpacity: 0.75,
+      playY: 0.50,
+      badgeSize: 110,
+      exportRes: 'original',
+      imgOpacity: 1.0,
+      imgBlur: 0,
+      imgBrightness: 100,
+      imgContrast: 100
+    };
+
+    if (picFileInput) {
+      picFileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          loadPicImage(e.target.files[0]);
+        }
+      });
+    }
+
+    if (picContainer) {
+      picContainer.addEventListener('dragover', (e) => { 
+        e.preventDefault(); 
+        picContainer.style.borderColor = '#6366f1'; 
+      });
+      picContainer.addEventListener('dragleave', () => { 
+        picContainer.style.borderColor = 'rgba(255, 255, 255, 0.2)'; 
+      });
+      picContainer.addEventListener('drop', (e) => {
+        e.preventDefault();
+        picContainer.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          loadPicImage(e.dataTransfer.files[0]);
+        }
+      });
+    }
+
+    function loadPicImage(file) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          picCurrentImg = img;
+          if (picDropZone) picDropZone.classList.add('has-image');
+          if (picResBadge) picResBadge.textContent = `Original: ${img.naturalWidth} × ${img.naturalHeight} px`;
+          renderPicCanvas();
+          showToast('Image loaded successfully!');
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Filter & Opacity listeners
+    const rngImgOpacity = document.getElementById('rngImgOpacity');
+    if (rngImgOpacity) {
+      rngImgOpacity.oninput = (e) => {
+        picConfig.imgOpacity = parseInt(e.target.value) / 100;
+        document.getElementById('valImgOpacity').textContent = e.target.value + '%';
+        renderPicCanvas();
+      };
+    }
+
+    const rngImgBlur = document.getElementById('rngImgBlur');
+    if (rngImgBlur) {
+      rngImgBlur.oninput = (e) => {
+        picConfig.imgBlur = parseInt(e.target.value);
+        document.getElementById('valImgBlur').textContent = e.target.value + 'px';
+        renderPicCanvas();
+      };
+    }
+
+    const rngImgBrightness = document.getElementById('rngImgBrightness');
+    if (rngImgBrightness) {
+      rngImgBrightness.oninput = (e) => {
+        picConfig.imgBrightness = parseInt(e.target.value);
+        document.getElementById('valImgBrightness').textContent = e.target.value + '%';
+        renderPicCanvas();
+      };
+    }
+
+    const rngImgContrast = document.getElementById('rngImgContrast');
+    if (rngImgContrast) {
+      rngImgContrast.oninput = (e) => {
+        picConfig.imgContrast = parseInt(e.target.value);
+        document.getElementById('valImgContrast').textContent = e.target.value + '%';
+        renderPicCanvas();
+      };
+    }
+
+    const btnResetPicAdjust = document.getElementById('btnResetPicAdjust');
+    if (btnResetPicAdjust) {
+      btnResetPicAdjust.onclick = () => {
+        picConfig.imgOpacity = 1.0;
+        picConfig.imgBlur = 0;
+        picConfig.imgBrightness = 100;
+        picConfig.imgContrast = 100;
+        if (rngImgOpacity) rngImgOpacity.value = 100;
+        if (rngImgBlur) rngImgBlur.value = 0;
+        if (rngImgBrightness) rngImgBrightness.value = 100;
+        if (rngImgContrast) rngImgContrast.value = 100;
+        document.getElementById('valImgOpacity').textContent = '100%';
+        document.getElementById('valImgBlur').textContent = '0px';
+        document.getElementById('valImgBrightness').textContent = '100%';
+        document.getElementById('valImgContrast').textContent = '100%';
+        renderPicCanvas();
+        showToast('Reset image adjustments!');
+      };
+    }
+
+    // Overlay element listeners
+    const chkPlayBtn = document.getElementById('chkPlayBtn');
+    if (chkPlayBtn) chkPlayBtn.onchange = (e) => { picConfig.showPlay = e.target.checked; renderPicCanvas(); };
+
+    const chkBadge = document.getElementById('chkBadge');
+    if (chkBadge) chkBadge.onchange = (e) => { picConfig.showBadge = e.target.checked; renderPicCanvas(); };
+
+    const playSize = document.getElementById('playSize');
+    if (playSize) playSize.oninput = (e) => { 
+      picConfig.playSize = parseInt(e.target.value); 
+      document.getElementById('valPlaySize').textContent = picConfig.playSize + 'px'; 
+      renderPicCanvas(); 
+    };
+
+    const playOpacity = document.getElementById('playOpacity');
+    if (playOpacity) playOpacity.oninput = (e) => { 
+      picConfig.playOpacity = parseInt(e.target.value) / 100; 
+      document.getElementById('valPlayOpacity').textContent = e.target.value + '%'; 
+      renderPicCanvas(); 
+    };
+
+    const playY = document.getElementById('playY');
+    if (playY) playY.oninput = (e) => { 
+      picConfig.playY = parseInt(e.target.value) / 100; 
+      document.getElementById('valPlayY').textContent = e.target.value + '%'; 
+      renderPicCanvas(); 
+    };
+
+    const badgeSize = document.getElementById('badgeSize');
+    if (badgeSize) badgeSize.oninput = (e) => { 
+      picConfig.badgeSize = parseInt(e.target.value); 
+      document.getElementById('valBadgeSize').textContent = picConfig.badgeSize + 'px'; 
+      renderPicCanvas(); 
+    };
+
+    const exportRes = document.getElementById('exportRes');
+    if (exportRes) exportRes.onchange = (e) => { picConfig.exportRes = e.target.value; };
+
+    function renderPicCanvas(targetCanvas = picCanvas, exportMode = false) {
+      if (!picCurrentImg || !targetCanvas) return;
+
+      let w = picCurrentImg.naturalWidth;
+      let h = picCurrentImg.naturalHeight;
+
+      if (exportMode) {
+        if (picConfig.exportRes === '4k') {
+          const ratio = h / w;
+          w = ratio >= 1 ? 2160 : 3840;
+          h = Math.round(w * ratio);
+        } else if (picConfig.exportRes === '1080p') {
+          const ratio = h / w;
+          w = ratio >= 1 ? 1080 : 1920;
+          h = Math.round(w * ratio);
+        }
+      }
+
+      targetCanvas.width = w;
+      targetCanvas.height = h;
+      const targetCtx = targetCanvas.getContext('2d');
+
+      // 1. Draw base photo with opacity & blur filters
+      targetCtx.save();
+      targetCtx.globalAlpha = picConfig.imgOpacity;
+
+      const filters = [];
+      if (picConfig.imgBlur > 0) {
+        const blurPx = picConfig.imgBlur * (w / 720);
+        filters.push(`blur(${blurPx}px)`);
+      }
+      if (picConfig.imgBrightness !== 100) {
+        filters.push(`brightness(${picConfig.imgBrightness}%)`);
+      }
+      if (picConfig.imgContrast !== 100) {
+        filters.push(`contrast(${picConfig.imgContrast}%)`);
+      }
+      if (filters.length > 0) {
+        targetCtx.filter = filters.join(' ');
+      }
+
+      targetCtx.drawImage(picCurrentImg, 0, 0, w, h);
+      targetCtx.restore();
+
+      const scale = w / 720;
+
+      // 2. Draw 4K Ultra HD Badge
+      if (picConfig.showBadge) {
+        drawPic4KBadge(targetCtx, w, h, picConfig.badgeSize * scale);
+      }
+
+      // 3. Draw Frosted Play Button
+      if (picConfig.showPlay) {
+        drawPicPlayButton(targetCtx, w, h, picConfig.playSize * scale, picConfig.playOpacity, picConfig.playY);
+      }
+    }
+
+    function drawPicPlayButton(ctx, w, h, size, opacity, posYRatio) {
+      const cx = w / 2;
+      const cy = h * posYRatio;
+      const radius = size / 2;
+
+      ctx.save();
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+      ctx.shadowBlur = 18 * (size / 160);
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 6 * (size / 160);
+
+      // Frosted slate circle
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(22, 24, 30, ${opacity})`;
+      ctx.fill();
+
+      // White ring
+      ctx.lineWidth = Math.max(3, 4.5 * (size / 160));
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+
+      // Inner white play triangle
+      const triH = radius * 0.95;
+      const triW = triH * 0.90;
+      const offsetX = triW * 0.10;
+
+      ctx.beginPath();
+      ctx.moveTo(cx - triW / 2 + offsetX, cy - triH / 2);
+      ctx.lineTo(cx + triW / 2 + offsetX, cy);
+      ctx.lineTo(cx - triW / 2 + offsetX, cy + triH / 2);
+      ctx.closePath();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawPic4KBadge(ctx, w, h, badgeW) {
+      const badgeH = badgeW * 0.65;
+      const margin = 24 * (w / 720);
+      const x = w - badgeW - margin;
+      const y = margin;
+      const cornerRadius = 12 * (badgeW / 110);
+      const topH = badgeH * 0.62;
+      const bottomH = badgeH - topH;
+
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,0.7)';
+      ctx.shadowBlur = 14 * (badgeW / 110);
+      ctx.shadowOffsetY = 4 * (badgeW / 110);
+
+      const goldGrad = ctx.createLinearGradient(x, y, x + badgeW, y + badgeH);
+      goldGrad.addColorStop(0, '#fef08a');
+      goldGrad.addColorStop(0.3, '#fbbf24');
+      goldGrad.addColorStop(0.7, '#f59e0b');
+      goldGrad.addColorStop(1, '#d97706');
+
+      ctx.beginPath();
+      ctx.roundRect(x, y, badgeW, badgeH, cornerRadius);
+      ctx.save();
+      ctx.clip();
+
+      ctx.fillStyle = '#0a0a0d';
+      ctx.fillRect(x, y, badgeW, topH);
+
+      ctx.fillStyle = goldGrad;
+      ctx.fillRect(x, y + topH, badgeW, bottomH);
+      ctx.restore();
+
+      ctx.beginPath();
+      ctx.roundRect(x, y, badgeW, badgeH, cornerRadius);
+      ctx.lineWidth = Math.max(3, 4 * (badgeW / 110));
+      ctx.strokeStyle = goldGrad;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(x, y + topH);
+      ctx.lineTo(x + badgeW, y + topH);
+      ctx.lineWidth = 1.5 * (badgeW / 110);
+      ctx.strokeStyle = '#000000';
+      ctx.stroke();
+
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.textAlign = 'center';
+
+      ctx.fillStyle = goldGrad;
+      ctx.font = `900 ${topH * 0.78}px -apple-system, BlinkMacSystemFont, "Impact", "Arial Black", sans-serif`;
+      ctx.fillText('4K', x + badgeW / 2, y + topH * 0.80);
+
+      ctx.fillStyle = '#0a0a0d';
+      ctx.font = `900 ${bottomH * 0.65}px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif`;
+      ctx.fillText('ULTRA HD', x + badgeW / 2, y + topH + bottomH * 0.72);
+      ctx.restore();
+    }
+
+    // Export Handlers
+    const btnDownloadJpg = document.getElementById('btnDownloadJpg');
+    if (btnDownloadJpg) {
+      btnDownloadJpg.onclick = () => {
+        if (!picCurrentImg) return alert('Please upload an image first!');
+        const expCanvas = document.createElement('canvas');
+        renderPicCanvas(expCanvas, true);
+        expCanvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `4k_stamped_${Date.now()}.jpg`;
+          a.click();
+          URL.revokeObjectURL(url);
+          showToast('Downloaded JPG!');
+        }, 'image/jpeg', 0.95);
+      };
+    }
+
+    const btnDownloadPng = document.getElementById('btnDownloadPng');
+    if (btnDownloadPng) {
+      btnDownloadPng.onclick = () => {
+        if (!picCurrentImg) return alert('Please upload an image first!');
+        const expCanvas = document.createElement('canvas');
+        renderPicCanvas(expCanvas, true);
+        expCanvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `4k_stamped_${Date.now()}.png`;
+          a.click();
+          URL.revokeObjectURL(url);
+          showToast('Downloaded PNG!');
+        }, 'image/png');
+      };
+    }
+
+    const btnDownloadOverlay = document.getElementById('btnDownloadOverlay');
+    if (btnDownloadOverlay) {
+      btnDownloadOverlay.onclick = () => {
+        const expCanvas = document.createElement('canvas');
+        const w = picCurrentImg ? picCurrentImg.naturalWidth : 1080;
+        const h = picCurrentImg ? picCurrentImg.naturalHeight : 1920;
+        expCanvas.width = w;
+        expCanvas.height = h;
+        const targetCtx = expCanvas.getContext('2d');
+        const scale = w / 720;
+        if (picConfig.showBadge) drawPic4KBadge(targetCtx, w, h, picConfig.badgeSize * scale);
+        if (picConfig.showPlay) drawPicPlayButton(targetCtx, w, h, picConfig.playSize * scale, picConfig.playOpacity, picConfig.playY);
+        expCanvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `play_overlay_${Date.now()}.png`;
+          a.click();
+          URL.revokeObjectURL(url);
+          showToast('Downloaded Transparent Overlay!');
+        }, 'image/png');
+      };
+    }
+
+    const btnExportVideo = document.getElementById('btnExportVideo');
+    if (btnExportVideo) {
+      btnExportVideo.onclick = () => {
+        if (!picCurrentImg) return alert('Please upload an image first!');
+        const expCanvas = document.createElement('canvas');
+        renderPicCanvas(expCanvas, true);
+        const btn = document.getElementById('btnExportVideo');
+        const origText = btn.textContent;
+        btn.textContent = '⏳ Rendering 2-Sec Video...';
+        btn.disabled = true;
+
+        const stream = expCanvas.captureStream(30);
+        let recorder;
+        try {
+          recorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+        } catch (e) {
+          recorder = new MediaRecorder(stream);
+        }
+
+        const chunks = [];
+        recorder.ondataavailable = e => chunks.push(e.data);
+        recorder.onstop = () => {
+          const blob = new Blob(chunks, { type: recorder.mimeType || 'video/webm' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `video_ad_creative_${Date.now()}.webm`;
+          a.click();
+          URL.revokeObjectURL(url);
+          btn.textContent = origText;
+          btn.disabled = false;
+          showToast('Video creative exported successfully!');
+        };
+
+        recorder.start();
+        setTimeout(() => {
+          recorder.stop();
+        }, 2000);
+      };
+    }
 
     // Default initialization: Always open on Home Page
     switchSection('home');

@@ -35,7 +35,15 @@ A high-performance, zero-middleman Google Share Link Converter, 50+ Worldwide cc
 - **Instant Human Forwarding:** Real users clicking from Facebook/Instagram/WhatsApp are seamlessly forwarded to the target offer link in milliseconds.
 - **One-Click Facebook Debugger Test:** Directly verify any generated link in Facebook Sharing Debugger.
 
-### 5. 🎬 6-Hour Auto-Rotating Live Wallpaper Engine
+### 5. 📸 Pic Edit // 4K Photo Styler & Overlay Suite (Section 5)
+- **4K Ultra HD & Video Play Overlays:** Stamp high-conversion frosted video play buttons and gold 4K Ultra HD badges onto any ad image.
+- **Picture Opacity & Blur Controls:** Fine-tune image transparency (10%-100%), blur radius (0-25px), brightness, and contrast.
+- **Export Options:**
+  - 🖼️ **Download JPG & PNG** (Original, 1080p Full HD, or True 4K Ultra HD 2160×3840).
+  - ✨ **Download Transparent Overlay PNG** for Photoshop/Canva.
+  - 🎬 **Convert to 2-Sec Video (MP4/WebM)**: Bypasses Facebook Ad policy restrictions against static fake play buttons.
+
+### 6. 🎬 6-Hour Auto-Rotating Live Wallpaper Engine
 - Seamlessly loads playlists from `wallpapers.json`.
 - Automatically schedules wallpapers in 6-hour time slots.
 - Manual refresh button with `sessionStorage` index persistence.
