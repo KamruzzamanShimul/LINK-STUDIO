@@ -1740,6 +1740,31 @@
                 </label>
               </div>
 
+              <div class="pic-toggle-item">
+                <span>⏱️ Video Duration Badge (Bottom-Right)</span>
+                <label class="pic-switch">
+                  <input type="checkbox" id="chkDuration" checked />
+                  <span class="pic-switch-slider"></span>
+                </label>
+              </div>
+
+              <!-- Duration text input and presets -->
+              <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); padding: 8px 10px; margin-bottom: 12px; border-radius: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 0.74rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Duration Time</span>
+                  <span style="font-size: 0.68rem; color: #10b981; font-family:'JetBrains Mono', monospace;">High-CTR</span>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                  <input type="text" id="txtDuration" class="input-box" value="0:47" style="padding: 5px 8px; font-size: 0.84rem; font-family:'JetBrains Mono', monospace; width: 75px; text-align: center;" placeholder="0:47" />
+                  <div class="pill-group" id="durationPills">
+                    <button type="button" class="pill-btn active" data-dur="0:47">0:47</button>
+                    <button type="button" class="pill-btn" data-dur="1:12">1:12</button>
+                    <button type="button" class="pill-btn" data-dur="2:35">2:35</button>
+                    <button type="button" class="pill-btn" data-dur="4:18">4:18</button>
+                  </div>
+                </div>
+              </div>
+
               <div class="pic-slider-row" style="margin-top:12px;">
                 <div class="pic-slider-label">
                   <span>Play Button Size</span>
@@ -1770,6 +1795,14 @@
                   <span class="pic-slider-val" id="valBadgeSize">110px</span>
                 </div>
                 <input type="range" class="pic-slider" id="badgeSize" min="60" max="220" value="110" />
+              </div>
+
+              <div class="pic-slider-row">
+                <div class="pic-slider-label">
+                  <span>Duration Badge Size</span>
+                  <span class="pic-slider-val" id="valDurationSize">32px</span>
+                </div>
+                <input type="range" class="pic-slider" id="durationSize" min="18" max="55" value="32" />
               </div>
             </div>
 
@@ -2451,6 +2484,9 @@
     const picConfig = {
       showPlay: true,
       showBadge: true,
+      showDuration: true,
+      durationText: '0:47',
+      durationSize: 32,
       playSize: 160,
       playOpacity: 0.75,
       playY: 0.50,
@@ -2567,6 +2603,40 @@
     const chkBadge = document.getElementById('chkBadge');
     if (chkBadge) chkBadge.onchange = (e) => { picConfig.showBadge = e.target.checked; renderPicCanvas(); };
 
+    const chkDuration = document.getElementById('chkDuration');
+    if (chkDuration) chkDuration.onchange = (e) => { picConfig.showDuration = e.target.checked; renderPicCanvas(); };
+
+    const txtDuration = document.getElementById('txtDuration');
+    if (txtDuration) {
+      txtDuration.oninput = (e) => {
+        picConfig.durationText = e.target.value.trim() || '0:00';
+        document.querySelectorAll('#durationPills .pill-btn').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-dur') === picConfig.durationText);
+        });
+        renderPicCanvas();
+      };
+    }
+
+    document.querySelectorAll('#durationPills .pill-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#durationPills .pill-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const dur = btn.getAttribute('data-dur');
+        picConfig.durationText = dur;
+        if (txtDuration) txtDuration.value = dur;
+        renderPicCanvas();
+      });
+    });
+
+    const durationSize = document.getElementById('durationSize');
+    if (durationSize) {
+      durationSize.oninput = (e) => {
+        picConfig.durationSize = parseInt(e.target.value, 10);
+        document.getElementById('valDurationSize').textContent = picConfig.durationSize + 'px';
+        renderPicCanvas();
+      };
+    }
+
     const playSize = document.getElementById('playSize');
     if (playSize) playSize.oninput = (e) => { 
       picConfig.playSize = parseInt(e.target.value); 
@@ -2653,6 +2723,57 @@
       if (picConfig.showPlay) {
         drawPicPlayButton(targetCtx, w, h, picConfig.playSize * scale, picConfig.playOpacity, picConfig.playY);
       }
+
+      // 4. Draw Video Duration Badge (Bottom-Right)
+      if (picConfig.showDuration) {
+        drawPicDurationBadge(targetCtx, w, h, picConfig.durationText, picConfig.durationSize * scale);
+      }
+    }
+
+    
+    function drawPicDurationBadge(ctx, w, h, text, size) {
+      if (!text) return;
+      const margin = 22 * (w / 720);
+      const fontSize = Math.max(14, size);
+      
+      ctx.save();
+      ctx.font = `700 ${fontSize}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "JetBrains Mono", sans-serif`;
+      
+      const metrics = ctx.measureText(text);
+      const textW = metrics.width;
+      const padX = fontSize * 0.45;
+      const padY = fontSize * 0.28;
+      const boxW = textW + padX * 2;
+      const boxH = fontSize + padY * 2;
+      const x = w - boxW - margin;
+      const y = h - boxH - margin;
+      const cornerRadius = 6 * (w / 720);
+
+      // Outer shadow
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.75)';
+      ctx.shadowBlur = 10 * (w / 720);
+      ctx.shadowOffsetY = 3 * (w / 720);
+
+      // Background box (True YouTube/FB style deep black)
+      ctx.beginPath();
+      ctx.roundRect(x, y, boxW, boxH, cornerRadius);
+      ctx.fillStyle = 'rgba(6, 7, 9, 0.88)';
+      ctx.fill();
+
+      // Subtle edge border
+      ctx.lineWidth = Math.max(1, 1.2 * (w / 720));
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
+      ctx.stroke();
+
+      // White Crisp Text
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, x + boxW / 2, y + boxH / 2 + (fontSize * 0.03));
+
+      ctx.restore();
     }
 
     function drawPicPlayButton(ctx, w, h, size, opacity, posYRatio) {
@@ -2804,6 +2925,7 @@
         const scale = w / 720;
         if (picConfig.showBadge) drawPic4KBadge(targetCtx, w, h, picConfig.badgeSize * scale);
         if (picConfig.showPlay) drawPicPlayButton(targetCtx, w, h, picConfig.playSize * scale, picConfig.playOpacity, picConfig.playY);
+        if (picConfig.showDuration) drawPicDurationBadge(targetCtx, w, h, picConfig.durationText, picConfig.durationSize * scale);
         expCanvas.toBlob((blob) => {
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
@@ -2845,6 +2967,9 @@
       }
       if (picConfig.showPlay) {
         drawPicPlayButton(targetCtx, w, h, (picConfig.playSize * scale) * pulse, picConfig.playOpacity, picConfig.playY);
+      }
+      if (picConfig.showDuration) {
+        drawPicDurationBadge(targetCtx, w, h, picConfig.durationText, picConfig.durationSize * scale);
       }
     }
 

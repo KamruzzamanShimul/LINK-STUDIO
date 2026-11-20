@@ -37,11 +37,12 @@ A high-performance, zero-middleman Google Share Link Converter, 50+ Worldwide cc
 
 ### 5. 📸 Pic Edit // 4K Photo Styler & Overlay Suite (Section 5)
 - **4K Ultra HD & Video Play Overlays:** Stamp high-conversion frosted video play buttons and gold 4K Ultra HD badges onto any ad image.
+- **⏱️ Video Duration Badge (Bottom-Right):** Add realistic YouTube/Facebook-style duration badges (e.g. `0:47`, `1:12`, `2:35`) in a high-contrast black box with white bold text to dramatically boost Click-Through Rates (CTR).
 - **Picture Opacity & Blur Controls:** Fine-tune image transparency (10%-100%), blur radius (0-25px), brightness, and contrast.
 - **Export Options:**
   - 🖼️ **Download JPG & PNG** (Original, 1080p Full HD, or True 4K Ultra HD 2160×3840).
   - ✨ **Download Transparent Overlay PNG** for Photoshop/Canva.
-  - 🎬 **Convert to 2-Sec Video (MP4/WebM)**: Bypasses Facebook Ad policy restrictions against static fake play buttons.
+  - 🎬 **Convert to 5-Sec Real Video (MP4)**: 30 FPS animated breathing pulse loop with silent audio track for full Meta/Facebook ad compliance.
 
 ### 6. 🎬 6-Hour Auto-Rotating Live Wallpaper Engine
 - Seamlessly loads playlists from `wallpapers.json`.
